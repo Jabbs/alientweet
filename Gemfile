@@ -8,38 +8,9 @@ gem 'pg'
 gem 'bcrypt-ruby'
 gem 'faker'
 gem 'jquery-rails'
-gem 'roadie', '~> 2.4'
-gem 'haml'
-gem 'haml-rails'
-gem "rinku"
 gem 'figaro'
-gem 'friendly_id'
-gem 'geocoder'
-gem 'gmaps4rails'
-gem "carrierwave"
-gem 'sidekiq'
-gem 'sinatra', require: false
-gem 'slim'
-gem "mini_magick"
-gem 'rmagick'
-gem "fog"
-gem "ancestry"
-gem 'unicorn'
-gem "rack-timeout"
-gem 'exception_notification'
-gem 'omniauth-facebook'
-gem "placeholder-gem"
-gem 'sidekiq-failures'
-gem 'sidekiq-status'
-gem 'activeresource'
 gem 'thin'
 gem 'nokogiri'
-gem "koala", "~> 1.11.0rc"
-gem "scrollreveal-rails"
-gem 'autoscaler'
-gem 'jquery-countdown-rails'
-gem 'language_list', '~> 1.1.0'
-gem 'countries'
 
 group :development do
   gem 'letter_opener'
