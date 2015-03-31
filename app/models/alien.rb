@@ -41,15 +41,15 @@ class Alien < ActiveRecord::Base
     resource.create_hashtagging(hashtags: hashtagging["hashtags"])
   end
 
-  parameters = {"url" => "http://www.bbc.com/sport/0/football/25912393"}
-  parameters = {"text" => "John is a very good football player!"}
-  
-  summarize = Alien.call_api("summarize", parameters)
-  extraction = Alien.call_api("extract", parameters)
-
-  sentiment = Alien.call_api("sentiment", parameters)
-  language = Alien.call_api("language", parameters)
-
-  puts "Sentiment: #{sentiment["polarity"]} (#{sentiment["polarity_confidence"]})"
-  puts "Language: #{language["lang"]} (#{language["confidence"]})"
+  # parameters = {"url" => "http://www.bbc.com/sport/0/football/25912393"}
+  # parameters = {"text" => "John is a very good football player!"}
+  # 
+  # summarize = Alien.call_api("summarize", parameters)
+  # extraction = Alien.call_api("extract", parameters)
+  # 
+  # sentiment = Alien.call_api("sentiment", parameters)
+  # language = Alien.call_api("language", parameters)
+  # 
+  # puts "Sentiment: #{sentiment["polarity"]} (#{sentiment["polarity_confidence"]})"
+  # puts "Language: #{language["lang"]} (#{language["confidence"]})"
 end
