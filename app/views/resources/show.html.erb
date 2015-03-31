@@ -19,18 +19,58 @@
 		<div class="col-md-12">
 			<div class="well">
 
-				<div class="row">
-					<div class="col-md-1">Name:</div>
-					<div class="col-md-11">
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Name:</div>
+					<div class="col-md-10">
 						<a href="<%= @resource.url %>" target="_blank">
 							<%= @resource.name %>
 						</a>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-1">Body:</div>
-					<div class="col-md-11">
-						<%= @resource.body %>
+
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Extracted Author:</div>
+					<div class="col-md-10">
+						<%= @resource.extraction.author %>
+					</div>
+				</div>
+
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Extracted Title:</div>
+					<div class="col-md-10">
+						<strong><%= @resource.extraction.title %></strong>
+					</div>
+				</div>
+
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Extracted Article:</div>
+					<div class="col-md-10">
+						<%= simple_format(@resource.extraction.article) %>
+					</div>
+				</div>
+				
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Extracted Feeds:</div>
+					<div class="col-md-10">
+						<%= @resource.extraction.feeds %>
+					</div>
+				</div>
+				
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Extracted Videos:</div>
+					<div class="col-md-10">
+						<%= @resource.extraction.videos %>
+					</div>
+				</div>
+				
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Summarization sentences:</div>
+					<div class="col-md-10">
+						<ul class="list-unstyled">
+							<% @resource.summarization.sentences.each do |sentence| %>
+								<li class="small-bottom-margin"><%= sentence %></li>
+							<% end %>
+						</ul>
 					</div>
 				</div>
 				

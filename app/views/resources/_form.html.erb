@@ -2,17 +2,26 @@
 	<%= form_for [@organization, @resource] do |f| %>
 		<div class="row small-bottom-margin">
 			<div class="col-md-12">
+				Name
 				<%= f.text_field :name, placeholder: "Enter name here...", autocomplete: :off, required: true, autofocus: true, style: "width:100%;" %>
 			</div>
 		</div>
+		<hr>
 		<div class="row small-bottom-margin">
 			<div class="col-md-12">
-				<%= f.text_field :url, placeholder: "Enter url here...", autocomplete: :off, autofocus: true, style: "width:100%;" %>
+				URL:
+				<%= f.text_field :url, placeholder: "http://www...", autocomplete: :off, autofocus: true, style: "width:100%;" %>
 			</div>
 		</div>
 		<div class="row small-bottom-margin">
 			<div class="col-md-12">
-				<%= f.text_area :body, placeholder: "Enter body here...", autocomplete: :off, autofocus: true, style: "width:100%;", rows: 4 %>
+				or
+			</div>
+		</div>
+		<div class="row small-bottom-margin">
+			<div class="col-md-12">
+				HTML
+				<%= f.text_area :html, placeholder: "<body>...</body>", autocomplete: :off, autofocus: true, style: "width:100%;", rows: 4 %>
 			</div>
 		</div>
 		<div class="row">

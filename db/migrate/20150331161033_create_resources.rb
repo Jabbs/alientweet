@@ -3,7 +3,7 @@ class CreateResources < ActiveRecord::Migration
     create_table :resources do |t|
       t.string :name
       t.string :url
-      t.text :body
+      t.text :html
       t.integer :organization_id
       
       t.timestamps

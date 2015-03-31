@@ -13,9 +13,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      respond_to do |format|
-        format.js
-      end
+      redirect_to root_path notice: "Organization created."
     else
       redirect_to root_path alert: "The application encountered an error."
     end
@@ -24,9 +22,7 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization = Organization.find(params[:id])
     @organization.destroy
-    respond_to do |format|
-      format.js
-    end
+    redirect_to root_path notice: "Organization removed."
   end
   
   private

@@ -13,6 +13,8 @@ class ResourcesController < ApplicationController
   def create
     @resource = @organization.resources.build(resource_params)
     if @resource.save
+      Alien.create_extraction(@resource)
+      Alien.create_summarization(@resource)
       redirect_to organization_resources_path(@organization), notice: "Resource created."
     else
       redirect_to root_path, alert: "The application encountered an error."
@@ -22,9 +24,7 @@ class ResourcesController < ApplicationController
   def destroy
     @resource = Resource.find(params[:id])
     @resource.destroy
-    respond_to do |format|
-      format.js
-    end
+    redirect_to organization_resources_path(@organization), notice: "Resource removed."
   end
   
   private 
@@ -35,6 +35,6 @@ class ResourcesController < ApplicationController
     end
     
     def resource_params
-      params.require(:resource).permit(:name, :url, :body)
+      params.require(:resource).permit(:name, :url, :html)
     end
 end
