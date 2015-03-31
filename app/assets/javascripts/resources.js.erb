@@ -1,0 +1,20 @@
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+// You can use CoffeeScript in this file: http://coffeescript.org/
+
+$('document').ready(function() {
+	$('#new-resource').click(function (e) {
+		e.preventDefault();
+		$("#resource-form").fadeIn(400);
+		$("#new-resource").hide();
+		$("#cancel-resource").show();
+		$('#resource_name').focus();
+	});
+	$('#cancel-resource').click(function (e) {
+		e.preventDefault();
+		$("#resource_name").val("");
+		$("#resource-form").hide();
+		$("#new-resource").show();
+		$("#cancel-resource").hide();
+	});
+});

@@ -1,0 +1,53 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>AlienText</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<%= link_to "Organizations", root_path %>
+			/
+			<%= link_to @organization.name, organization_resources_path(@organization) %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well">
+				<div id="resources">
+					<div class="row">
+						<div class="col-md-12">
+							<%= @organization.name %> Resources:
+						</div>
+					</div>
+					<hr class="blue-hr">
+					<div class="row">
+						<div class="col-md-12">
+							<%= render @resources %>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div id="resource-form" style="display:none;">
+							<%= render "resources/form" %>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="center">
+							<%= link_to "#" do %>
+								<i class="fa fa-plus-circle" id="new-resource" style="font-size:200%; margin-top:10px;"></i>
+							<% end %>
+							<a href="#" class="grey-link">
+								<i class="fa fa-minus-circle" id="cancel-resource" style="font-size:200%; margin-top:10px;display:none;"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

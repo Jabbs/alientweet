@@ -1,0 +1,11 @@
+<div class="well">
+	<%= form_for @organization, remote: true do |f| %>
+		<div class="row">
+			<div class="col-md-12">
+				<%= f.text_field :name, placeholder: "Enter name here...", autocomplete: :off, required: true, autofocus: true, style: "width:70%;" %>
+				<%= f.submit "+", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
+			</div>
+		</div>
+	<% end %>
+	
+</div>
