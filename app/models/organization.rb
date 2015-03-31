@@ -1,3 +1,3 @@
 class Organization < ActiveRecord::Base
-  has_many :resources, dependent: :destroy
+  has_many :buckets, dependent: :destroy
 end

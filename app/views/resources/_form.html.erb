@@ -1,12 +1,5 @@
 <div class="well">
-	<%= form_for [@organization, @resource] do |f| %>
-		<div class="row small-bottom-margin">
-			<div class="col-md-12">
-				Name
-				<%= f.text_field :name, placeholder: "Enter name here...", autocomplete: :off, required: true, autofocus: true, style: "width:100%;" %>
-			</div>
-		</div>
-		<hr>
+	<%= form_for [@organization, @bucket, @resource] do |f| %>
 		<div class="row small-bottom-margin">
 			<div class="col-md-12">
 				URL:
@@ -21,12 +14,12 @@
 		<div class="row small-bottom-margin">
 			<div class="col-md-12">
 				HTML
-				<%= f.text_area :html, placeholder: "<body>...</body>", autocomplete: :off, autofocus: true, style: "width:100%;", rows: 4 %>
+				<%= f.text_area :html, placeholder: "<body>...</body>", autocomplete: :off, style: "width:100%;", rows: 4 %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
+				<%= f.submit "Generate", data: { disable_with: "Generating..." }, class: "btn btn-default" %>
 			</div>
 		</div>
 

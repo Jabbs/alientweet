@@ -2,8 +2,8 @@ class ResourcesController < ApplicationController
   before_filter :instantiate_stuff
   
   def index
-    @resources = @organization.resources
-    @resource = Resource.new(organization_id: @organization.id)
+    @resources = @bucket.resources
+    @resource = Resource.new(bucket_id: @bucket.id)
   end
   
   def show
@@ -11,11 +11,12 @@ class ResourcesController < ApplicationController
   end
   
   def create
-    @resource = @organization.resources.build(resource_params)
+    @resource = @bucket.resources.build(resource_params)
     if @resource.save
       Alien.create_extraction(@resource)
       Alien.create_summarization(@resource)
-      redirect_to organization_resources_path(@organization), notice: "Resource created."
+      Alien.create_hashtagging(@resource)
+      redirect_to organization_bucket_resources_path(@organization, @bucket), notice: "Resource created."
     else
       redirect_to root_path, alert: "The application encountered an error."
     end
@@ -24,14 +25,15 @@ class ResourcesController < ApplicationController
   def destroy
     @resource = Resource.find(params[:id])
     @resource.destroy
-    redirect_to organization_resources_path(@organization), notice: "Resource removed."
+    redirect_to organization_bucket_resources_path(@organization, @bucket), notice: "Resource removed."
   end
   
   private 
   
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
-      @resources = @organization.resources
+      @bucket = @organization.buckets.find(params[:bucket_id])
+      @resources = @bucket.resources
     end
     
     def resource_params

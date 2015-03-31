@@ -1,8 +1,8 @@
 <div id="<%= resource.id %>-resource">
 	<div class="row">
 		<div class="col-md-12" style="margin-bottom:10px;">
-			<%= link_to resource.name, [@organization, resource] %>
-			<%= link_to [@organization, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+			<%= link_to resource.extraction.title, [@organization, @bucket, resource] %>
+			<%= link_to [@organization, @bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
 			  <i class='fa fa-trash'></i>
 			<% end %>
 		</div>

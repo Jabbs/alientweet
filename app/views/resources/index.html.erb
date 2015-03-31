@@ -8,7 +8,9 @@
 		<div class="col-md-12">
 			<%= link_to "Organizations", root_path %>
 			/
-			<%= link_to @organization.name, organization_resources_path(@organization) %>
+			<%= link_to "#{@organization.name}", organization_buckets_path(@organization) %>
+			/
+			<%= @bucket.name %>
 		</div>
 	</div>
 	<div class="row">
@@ -17,7 +19,7 @@
 				<div id="resources">
 					<div class="row">
 						<div class="col-md-12">
-							<%= @organization.name %> Resources:
+							<strong>Resources:</strong>
 						</div>
 					</div>
 					<hr class="blue-hr">

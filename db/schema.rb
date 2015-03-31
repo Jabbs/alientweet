@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331190409) do
+ActiveRecord::Schema.define(version: 20150331195707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20150331190409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "buckets", force: true do |t|
+    t.string   "name"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "buckets", ["organization_id"], name: "index_buckets_on_organization_id", using: :btree
 
   create_table "extractions", force: true do |t|
     t.integer  "resource_id",              null: false
@@ -36,6 +45,16 @@ ActiveRecord::Schema.define(version: 20150331190409) do
 
   add_index "extractions", ["resource_id"], name: "index_extractions_on_resource_id", using: :btree
 
+  create_table "hashtaggings", force: true do |t|
+    t.integer  "resource_id"
+    t.text     "text"
+    t.text     "hashtags",    default: [], array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hashtaggings", ["resource_id"], name: "index_hashtaggings_on_resource_id", using: :btree
+
   create_table "organizations", force: true do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
@@ -46,12 +65,12 @@ ActiveRecord::Schema.define(version: 20150331190409) do
     t.string   "name"
     t.string   "url"
     t.text     "html"
-    t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bucket_id"
   end
 
-  add_index "resources", ["organization_id"], name: "index_resources_on_organization_id", using: :btree
+  add_index "resources", ["bucket_id"], name: "index_resources_on_bucket_id", using: :btree
 
   create_table "summarizations", force: true do |t|
     t.integer  "resource_id",              null: false

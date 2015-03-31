@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+
   resources :organizations do
-    resources :resources
+    resources :buckets do
+      resources :resources
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

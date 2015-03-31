@@ -13,16 +13,16 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      redirect_to root_path notice: "Organization created."
+      redirect_to root_path, notice: "Organization created."
     else
-      redirect_to root_path alert: "The application encountered an error."
+      redirect_to root_path, alert: "The application encountered an error."
     end
   end
   
   def destroy
     @organization = Organization.find(params[:id])
     @organization.destroy
-    redirect_to root_path notice: "Organization removed."
+    redirect_to root_path, notice: "Organization removed."
   end
   
   private

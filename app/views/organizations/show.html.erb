@@ -8,20 +8,19 @@
 		<div class="col-md-12">
 			<%= link_to "Organizations", root_path %>
 			/
-			<%= link_to @organization.name, organization_resources_path(@organization) %>
+			<%= link_to @organization.name, organization_buckets_path(@organization) %>
 
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="well">
-
-				<div class="row">
-					<div class="col-md-1">Name:</div>
-					<div class="col-md-11">
-						<%= @organization.name %>
+				<h3><%= @organization.name %></h3>
+				<% @organization.buckets.each do |bucket| %>
+					<div class="row">
+						<div class="col-md-12"><%= link_to bucket.name, [@organization, bucket] %></div>
 					</div>
-				</div>
+				<% end %>
 				
 			</div>
 		</div>

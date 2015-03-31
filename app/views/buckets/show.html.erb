@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>AlienText</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<%= link_to "Organizations", root_path %>
+			/
+			<%= link_to "Buckets", organization_buckets_path(@organization) %>
+			/
+			<%= @bucket.name %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well">
+				<div class="row">
+					<div class="col-md-12">
+						<strong>Resources</strong>
+					</div>
+				</div>
+				<hr class="blue-hr">
+				<div id="organizations">
+					<div class="row">
+						<div class="col-md-12">
+							<%= render @buckets %>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<div id="bucket-form" style="display:none;"><%= render "buckets/form" %></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="center">
+								<%= link_to "#", id: "new-bucket" do %>
+									<i class="fa fa-plus-circle" style="font-size:200%; margin-top:10px;"></i>
+								<% end %>
+								<a href="#" class="grey-link">
+									<i class="fa fa-minus-circle" id="cancel-bucket" style="font-size:200%; margin-top:10px;display:none;"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>

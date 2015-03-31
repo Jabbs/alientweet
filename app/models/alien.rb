@@ -32,8 +32,13 @@ class Alien < ActiveRecord::Base
   def self.create_summarization(resource)
     parameters = {"url" => resource.url}
     summarization = Alien.call_api("summarize", parameters)
-    resource.create_summarization!(text: summarization["text"], sentences: summarization["sentences"])
-    logger.debug "****** #{summarization["sentences"]}"
+    resource.create_summarization(sentences: summarization["sentences"])
+  end
+  
+  def self.create_hashtagging(resource)
+    parameters = {"url" => resource.url}
+    hashtagging = Alien.call_api("hashtags", parameters)
+    resource.create_hashtagging(hashtags: hashtagging["hashtags"])
   end
 
   parameters = {"url" => "http://www.bbc.com/sport/0/football/25912393"}

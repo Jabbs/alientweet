@@ -8,11 +8,11 @@
 		<div class="col-md-12">
 			<%= link_to "Organizations", root_path %>
 			/
-			<%= link_to @organization.name, @organization %>
+			<%= link_to "#{@organization.name}", organization_buckets_path(@organization) %>
 			/
-			<%= link_to "resources", organization_resources_path(@organization) %>
+			<%= link_to @bucket.name, organization_bucket_resources_path(@organization, @bucket) %>
 			/
-			<%= @resource.name %>
+			<%= @resource.extraction.title %>
 		</div>
 	</div>
 	<div class="row">
@@ -20,10 +20,10 @@
 			<div class="well">
 
 				<div class="row small-bottom-margin">
-					<div class="col-md-2">Name:</div>
+					<div class="col-md-2">Extracted Title:</div>
 					<div class="col-md-10">
 						<a href="<%= @resource.url %>" target="_blank">
-							<%= @resource.name %>
+							<%= @resource.extraction.title %>
 						</a>
 					</div>
 				</div>
@@ -32,13 +32,6 @@
 					<div class="col-md-2">Extracted Author:</div>
 					<div class="col-md-10">
 						<%= @resource.extraction.author %>
-					</div>
-				</div>
-
-				<div class="row small-bottom-margin">
-					<div class="col-md-2">Extracted Title:</div>
-					<div class="col-md-10">
-						<strong><%= @resource.extraction.title %></strong>
 					</div>
 				</div>
 
@@ -67,10 +60,21 @@
 					<div class="col-md-2">Summarization sentences:</div>
 					<div class="col-md-10">
 						<ul class="list-unstyled">
-							<% @resource.summarization.sentences.each do |sentence| %>
-								<li class="small-bottom-margin"><%= sentence %></li>
+							<% if @resource.summarization %>
+								<% @resource.summarization.sentences.each do |sentence| %>
+									<li class="small-bottom-margin"><%= sentence %></li>
+								<% end %>
 							<% end %>
 						</ul>
+					</div>
+				</div>
+				
+				<div class="row small-bottom-margin">
+					<div class="col-md-2">Hashtagging hashtags:</div>
+					<div class="col-md-10">
+						<% if @resource.hashtagging %>
+							<%= @resource.hashtagging.hashtags.to_sentence %>
+						<% end %>
 					</div>
 				</div>
 				
