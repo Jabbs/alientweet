@@ -2,12 +2,12 @@ class ResourcesController < ApplicationController
   before_filter :instantiate_stuff
   
   def index
-    @resources = @bucket.resources
     @resource = Resource.new(bucket_id: @bucket.id)
   end
   
   def show
     @resource = Resource.find(params[:id])
+    @suggested_tweet = @resource.summarization.sentences.shuffle.first + " " + @resource.hashtagging.hashtags.shuffle.first(rand(1..3)).join(', ')
   end
   
   def create
@@ -33,7 +33,8 @@ class ResourcesController < ApplicationController
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
       @bucket = @organization.buckets.find(params[:bucket_id])
-      @resources = @bucket.resources
+      @resources = @bucket.resources.joins(:extraction).order("extractions.title ASC")
+      
     end
     
     def resource_params

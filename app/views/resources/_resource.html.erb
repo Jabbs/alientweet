@@ -1,9 +1,17 @@
 <div id="<%= resource.id %>-resource">
 	<div class="row">
-		<div class="col-md-12" style="margin-bottom:10px;">
+		<div class="col-md-1">
+			<%= resource.created_at.strftime('%-m/%d/%y') %>
+		</div>
+		<div class="col-md-6" style="margin-bottom:10px;">
 			<%= link_to resource.extraction.title, [@organization, @bucket, resource] %>
 			<%= link_to [@organization, @bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
 			  <i class='fa fa-trash'></i>
+			<% end %>
+		</div>
+		<div class="col-md-5">
+			<% if resource.hashtagging %>
+				<small><%= resource.hashtagging.hashtags.to_sentence %></small>
 			<% end %>
 		</div>
 	</div>

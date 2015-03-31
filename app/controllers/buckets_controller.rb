@@ -28,7 +28,7 @@ class BucketsController < ApplicationController
   
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
-      @buckets = @organization.buckets
+      @buckets = @organization.buckets.order("name ASC")
     end
     
     def bucket_params

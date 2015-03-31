@@ -28,7 +28,7 @@ class OrganizationsController < ApplicationController
   private
   
     def instantiate_orgs
-      @organizations = Organization.all
+      @organizations = Organization.order("name ASC")
     end
     
     def organization_params
