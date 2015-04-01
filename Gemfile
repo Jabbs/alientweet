@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'figaro'
 gem 'thin'
 gem 'nokogiri'
+gem 'feedjira'
+gem 'mechanize'
 
 group :development do
   gem 'letter_opener'

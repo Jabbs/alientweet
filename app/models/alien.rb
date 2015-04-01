@@ -2,6 +2,9 @@ class Alien < ActiveRecord::Base
   require 'net/http'
   require 'uri'
   require 'json'
+  require 'nokogiri'
+  require 'open-uri'
+  require 'mechanize'
 
   def self.call_api(endpoint, parameters)
     url = URI.parse("https://api.aylien.com/api/v1/#{endpoint}")
@@ -40,16 +43,5 @@ class Alien < ActiveRecord::Base
     hashtagging = Alien.call_api("hashtags", parameters)
     resource.create_hashtagging(hashtags: hashtagging["hashtags"])
   end
-
-  # parameters = {"url" => "http://www.bbc.com/sport/0/football/25912393"}
-  # parameters = {"text" => "John is a very good football player!"}
-  # 
-  # summarize = Alien.call_api("summarize", parameters)
-  # extraction = Alien.call_api("extract", parameters)
-  # 
-  # sentiment = Alien.call_api("sentiment", parameters)
-  # language = Alien.call_api("language", parameters)
-  # 
-  # puts "Sentiment: #{sentiment["polarity"]} (#{sentiment["polarity_confidence"]})"
-  # puts "Language: #{language["lang"]} (#{language["confidence"]})"
+  
 end

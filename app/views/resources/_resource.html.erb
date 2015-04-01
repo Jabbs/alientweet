@@ -11,7 +11,7 @@
 		</div>
 		<div class="col-md-5">
 			<% if resource.hashtagging %>
-				<small><%= resource.hashtagging.hashtags.to_sentence %></small>
+				<small><%= resource.hashtagging.hashtags.first(10).to_sentence %></small>
 			<% end %>
 		</div>
 	</div>
