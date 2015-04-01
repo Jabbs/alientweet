@@ -13,7 +13,27 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="well">
-
+				<% @tweets.each do |tweet| %>
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-10">
+							<div class="tweet">
+								<%= tweet.copy %>
+								<%= link_to [@organization, @bucket, @resource, tweet], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+								  <i class='fa fa-trash'></i>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				<% end %>
+				
+				
+				<div class="row">
+					<div class="col-md-2">Add tweet:</div>
+					<div class="col-md-10">
+						<%= render "tweets/form", tweet: @tweet %>
+					</div>
+				</div>
 				<div class="row small-bottom-margin">
 					<div class="col-md-2">Random Tweet:</div>
 					<div class="col-md-10">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331195707) do
+ActiveRecord::Schema.define(version: 20150401202458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20150331195707) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "bucket_id"
+    t.boolean  "read",       default: false
+    t.boolean  "approved",   default: false
   end
 
   add_index "resources", ["bucket_id"], name: "index_resources_on_bucket_id", using: :btree
@@ -81,5 +83,17 @@ ActiveRecord::Schema.define(version: 20150331195707) do
   end
 
   add_index "summarizations", ["resource_id"], name: "index_summarizations_on_resource_id", using: :btree
+
+  create_table "tweets", force: true do |t|
+    t.integer  "resource_id"
+    t.string   "copy"
+    t.string   "link"
+    t.boolean  "approved",    default: false
+    t.boolean  "sent",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tweets", ["resource_id"], name: "index_tweets_on_resource_id", using: :btree
 
 end

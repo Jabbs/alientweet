@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :organizations do
     resources :buckets do
-      resources :resources
+      resources :resources do
+        resources :tweets
+      end
     end
   end
 

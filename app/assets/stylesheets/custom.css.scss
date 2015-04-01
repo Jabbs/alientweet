@@ -178,7 +178,11 @@ h4 { line-height: 1.2em; }
   filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
-
+.tweet {
+	padding:5px;
+	margin-bottom:10px;
+	border: 1px solid $blue;
+}
 
 #organizations {
 	padding:10px;

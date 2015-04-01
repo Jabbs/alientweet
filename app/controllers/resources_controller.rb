@@ -7,7 +7,13 @@ class ResourcesController < ApplicationController
   
   def show
     @resource = Resource.find(params[:id])
-    @suggested_tweet = @resource.summarization.sentences.shuffle.first + " " + @resource.hashtagging.hashtags.shuffle.first(rand(1..3)).join(', ')
+    @tweet = Tweet.new(resource_id: @resource.id)
+    @tweets = @resource.tweets
+    if @resource.summarization.sentences.present?
+      @suggested_tweet = @resource.summarization.sentences.shuffle.first + " " + @resource.hashtagging.hashtags.shuffle.first(rand(1..3)).join(', ')
+    else
+      @suggested_tweet = "n/a"
+    end
   end
   
   def create
@@ -34,7 +40,6 @@ class ResourcesController < ApplicationController
       @organization = Organization.find(params[:organization_id])
       @bucket = @organization.buckets.find(params[:bucket_id])
       @resources = @bucket.resources.joins(:extraction).order("extractions.title ASC")
-      
     end
     
     def resource_params

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  resource_id: 1
+  copy: MyString
+  link: MyString
+
+two:
+  resource_id: 1
+  copy: MyString
+  link: MyString
