@@ -51,17 +51,26 @@
 						<% @unapproved_tweets.each do |tweet| %>
 							<%= render "tweets/tweet", tweet: tweet, date: tweet.created_at %>
 						<% end %>
+						<% if @unapproved_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
+						<% end %>
 					</div>
 					<div class="col-md-4">
 						<h4 class="center">Tweets Approved</h4>
 						<% @approved_tweets.each do |tweet| %>
 							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_approved_at %>
 						<% end %>
+						<% if @approved_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
+						<% end %>
 					</div>
 					<div class="col-md-4">
 						<h4 class="center">Tweets Sent</h4>
 						<% @sent_tweets.each do |tweet| %>
 							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_sent_at %>
+						<% end %>
+						<% if @sent_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
 						<% end %>
 					</div>
 				</div>
