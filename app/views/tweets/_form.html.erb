@@ -1,16 +1,15 @@
-<div class="well">
+
 	<%= form_for [@organization, @bucket, @resource, @tweet] do |f| %>
-		<div class="row small-bottom-margin">
+		<div class="row">
 			<div class="col-md-12">
-				<%= f.text_area :copy, placeholder: "Body of tweet. #duh", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "140" %>
+				<%= f.text_area :copy, placeholder: "Body of tweet...", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "140" %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<%= f.submit "Add Tweet", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
+				<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
 			</div>
 		</div>
 
 	<% end %>
 	
-</div>

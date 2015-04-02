@@ -10,9 +10,14 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
   
-  def resources
+  def all_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources
+    @resources = @organization.resources.where(archived: false)
+  end
+  
+  def archived_resources
+    @organization = Organization.find(params[:organization_id])
+    @resources = @organization.resources.where(archived: true)
   end
   
   def create

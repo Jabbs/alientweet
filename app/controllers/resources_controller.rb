@@ -18,6 +18,15 @@ class ResourcesController < ApplicationController
     end
   end
   
+  def update
+    @resource = Resource.find(params[:id])
+    if @resource.update_attributes(resource_params)
+      redirect_to [@organization, @resource.bucket, @resource]
+    else
+      redirect_to root_path, alert: "An error occurred."
+    end
+  end
+  
   def create
     @resource = @bucket.resources.build(resource_params)
     if @resource.save
@@ -41,10 +50,10 @@ class ResourcesController < ApplicationController
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
       @bucket = @organization.buckets.find(params[:bucket_id])
-      @resources = @bucket.resources.joins(:extraction).order("extractions.title ASC")
+      @resources = @bucket.resources.where(archived: false).joins(:extraction).order("extractions.title ASC")
     end
     
     def resource_params
-      params.require(:resource).permit(:name, :url, :html)
+      params.require(:resource).permit(:name, :url, :html, :last_archived_at, :archived, :bucket_id)
     end
 end

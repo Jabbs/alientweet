@@ -11,13 +11,17 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<small>Bucket: <%= link_to resource.bucket.name, organization_bucket_resources_path(@organization, resource.bucket) %></small>
+					<small>
+						Bucket: <%= link_to resource.bucket.name, organization_bucket_resources_path(@organization, resource.bucket) %>
+						|
+						Added: <%= resource.created_at.strftime('%-m/%d/%y, %-l:%M%P') %>
+					</small>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<% if resource.hashtagging %>
-						<small><%= resource.hashtagging.hashtags.first(10).to_sentence %></small>
+						<small><%= resource.hashtagging.hashtags.first(15).to_sentence %></small>
 					<% end %>
 				</div>
 			</div>

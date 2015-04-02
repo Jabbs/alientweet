@@ -4,7 +4,12 @@
 			<%= link_to "Organizations", root_path %>
 			/
 			<%= @organization.name %>
-			<div class="pull-right"><%= link_to "All #{@organization.name} Resources", organization_resources_path(@organization) %></div>
+			<div class="pull-right">
+				Resources:
+				<%= link_to "Archived", organization_archived_resources_path(@organization) %>
+				|
+				<%= link_to "All", organization_all_resources_path(@organization) %>
+			</div>
 		</div>
 	</div>
 	<div class="row">

@@ -8,7 +8,12 @@
 			<%= link_to @bucket.name, organization_bucket_resources_path(@organization, @bucket) %>
 			/
 			<%= @resource.extraction.title %>
-			<div class="pull-right"><%= link_to "All #{@organization.name} Resources", organization_resources_path(@organization) %></div>
+			<div class="pull-right">
+				Resources:
+				<%= link_to "Archived", organization_archived_resources_path(@organization) %>
+				|
+				<%= link_to "All", organization_all_resources_path(@organization) %>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -28,16 +33,34 @@
 				<div class="row small-bottom-margin">
 					<div class="col-md-2"><div class="pull-right">Added</div></div>
 					<div class="col-md-10">
-						<%= @resource.created_at.strftime('%-m/%d/%y') %>
+						<%= @resource.created_at.strftime('%-m/%d/%y, %-l:%M%P') %>
 					</div>
 				</div>
 				
 				<div class="row small-bottom-margin">
 					<div class="col-md-2"><div class="pull-right">Extracted Title:</div></div>
-					<div class="col-md-10">
-						<a href="<%= @resource.url %>" target="_blank">
-							<%= @resource.extraction.title %>
-						</a>
+					<div class="col-md-8">
+						<h3 class="no-margin">
+							<a href="<%= @resource.url %>" target="_blank">
+								<%= @resource.extraction.title %>
+							</a>
+						</h3>
+					</div>
+					<div class="col-md-2">
+						<%= form_for [@resource.bucket.organization, @resource.bucket, @resource], method: :put do |f| %>
+							<%= f.hidden_field :bucket_id, value: @resource.bucket.id %>
+							<% if @resource.archived == false %>
+								<%= f.hidden_field :archived, value: true %>
+								<%= f.hidden_field :last_archived_at, value: DateTime.now %>
+							<% else %>
+								<%= f.hidden_field :archived, value: false %>
+							<% end %>
+							<% if @resource.archived == false %>
+								<%= f.submit "Archive", class: "btn btn-default btn-success-hover pull-right" %>
+							<% else %>
+								<%= f.submit "✓ Archived", class: "btn btn-default btn-danger-hover pull-right" %>
+							<% end %>
+						<% end %>
 					</div>
 				</div>
 				
@@ -111,7 +134,8 @@
 						<%= render "tweets/form", tweet: @tweet %>
 					</div>
 				</div>
-				<div class="row">
+				<hr class="blue-hr">
+				<div class="row" style="margin-top:40px;">
 					<div class="col-md-2"><div class="pull-right">Tweets:</div></div>
 					<div class="col-md-10">
 						<% @tweets.each do |tweet| %>

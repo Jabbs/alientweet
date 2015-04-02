@@ -17,8 +17,10 @@ class TweetsController < ApplicationController
       logger.debug "REFERRER: #{referrer}"
       if referrer == "buckets"
         redirect_to organization_buckets_path(@organization)
+      elsif referrer == "all_resources"
+        redirect_to organization_all_resources_path(@organization)
       elsif referrer == "resources"
-        redirect_to organization_resources_path(@organization)
+        redirect_to organization_bucket_resources_path(@organization, @tweet.resource.bucket)
       else
         redirect_to [@organization, @tweet.resource.bucket, @tweet.resource]
       end
@@ -33,8 +35,10 @@ class TweetsController < ApplicationController
     referrer = request.referer.split('/').last
     if referrer == "buckets"
       redirect_to organization_buckets_path(@organization)
+    elsif referrer == "all_resources"
+      redirect_to organization_all_resources_path(@organization), notice: "Tweet removed."
     elsif referrer == "resources"
-      redirect_to organization_resources_path(@organization), notice: "Tweet removed."
+      redirect_to organization_bucket_resources_path(@organization, @tweet.resource.bucket), notice: "Tweet removed."
     else
       redirect_to [@organization, @tweet.resource.bucket, @tweet.resource], notice: "Tweet removed."
     end

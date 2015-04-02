@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402174153) do
+ActiveRecord::Schema.define(version: 20150402191618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,8 +68,10 @@ ActiveRecord::Schema.define(version: 20150402174153) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "bucket_id"
-    t.boolean  "read",       default: false
-    t.boolean  "approved",   default: false
+    t.boolean  "read",             default: false
+    t.boolean  "approved",         default: false
+    t.boolean  "archived",         default: false
+    t.datetime "last_archived_at"
   end
 
   add_index "resources", ["bucket_id"], name: "index_resources_on_bucket_id", using: :btree

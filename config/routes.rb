@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   resources :organizations do
-    get "resources"
+    get "all_resources"
+    get "archived_resources"
     resources :buckets do
       resources :resources do
         resources :tweets
