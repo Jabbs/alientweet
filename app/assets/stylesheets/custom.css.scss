@@ -114,6 +114,8 @@ body {
 h1, h2, h3, h4, h5, h6, p { font-family: 'Nunito', sans-serif; }
 h1 { color: $dark_blue; }
 h4 { line-height: 1.2em; }
+p { margin-bottom: 20px; font-weight: normal;}
+
 .zero-height { height: 0px; }
 .inline { display: inline; }
 .huge { font-size: 500%; line-height: 100%; }
