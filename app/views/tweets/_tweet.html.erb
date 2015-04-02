@@ -19,15 +19,15 @@
 <div class="tweet <%= active_or_no %> <%= sent_or_no %>">
 	<% if show_bucket %>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-8">
 				<small>
-					<%= link_to(truncate(tweet.resource.extraction.title, length: 40), [@organization, tweet.resource.bucket, tweet.resource]) %>
+					<%= link_to(truncate(tweet.resource.extraction.title, length: 30), [@organization, tweet.resource.bucket, tweet.resource], title: tweet.resource.extraction.title) %>
 					<a href="<%= tweet.resource.url %>" target="_blank" class="grey-link-dark">
-						<i class='fa fa-file-image-o' title="link to URL"></i>
+						<i class='fa fa-file-image-o' title="external url"></i>
 					</a>
 				</small>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<small class="pull-right"><%= link_to tweet.resource.bucket.name, organization_bucket_resources_path(@organization, tweet.resource.bucket) %></small>
 			</div>
 		</div>
@@ -40,13 +40,17 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-1" style="padding-right:0px; width:35px;">
+		<div class="col-md-2">
+			
+			<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
+			<%= render "tweets/edit_tweet_modal", tweet: tweet %>
+			
 			<%= link_to [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :delete, class: "grey-link-dark", data: { confirm: 'Are you sure?' } do %>
-			  <i class='fa fa-trash'></i>
+			  <i class='fa fa-trash' title='remove tweet'></i>
 			<% end %>
 		</div>
-		<div class="col-md-3" style="padding-left:0px;padding-right:0px;">
-			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+		<div class="col-md-3 col-md-offset-4">
+			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
 				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
 				<% if tweet.approved == false %>
 					<%= f.hidden_field :approved, value: true %>
@@ -55,13 +59,13 @@
 					<%= f.hidden_field :approved, value: false %>
 				<% end %>
 				<% if tweet.approved == false %>
-					<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover" %>
+					<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
 				<% else %>
-					<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover" %>
+					<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
 				<% end %>
 			<% end %>
 		</div>
-		<div class="col-md-5" style="padding-left:0px;padding-right:0px;">
+		<div class="col-md-3">
 			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
 				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
 				<% if tweet.sent == false %>
@@ -71,9 +75,9 @@
 					<%= f.hidden_field :sent, value: false %>
 				<% end %>
 				<% if tweet.sent == false %>
-					<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover" %>
+					<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
 				<% else %>
-					<%= f.submit "✓ Sent", class: "btn btn-xs btn-default btn-danger-hover" %>
+					<%= f.submit "✓ Sent", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
 				<% end %>
 			<% end %>
 		</div>

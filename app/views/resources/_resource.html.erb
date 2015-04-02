@@ -1,7 +1,7 @@
 <div id="<%= resource.id %>-resource">
 	<div class="row">
 		<div class="col-md-6" style="margin-bottom:10px;">
-			<div class="row">
+			<div class="row small-bottom-margin">
 				<div class="col-md-12">
 					<span class="tweet_resource_tag">
 						<%= resource.id %>
@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<% if resource.hashtagging %>
-						<small><%= resource.hashtagging.hashtags.first(15).to_sentence %></small>
+						<small><%= resource.hashtagging.hashtags.first(15).join(" ") %></small>
 					<% end %>
 				</div>
 			</div>

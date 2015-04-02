@@ -3,7 +3,7 @@
 		<div class="col-md-12" style="margin-bottom:10px;">
 			<%= link_to organization.name, organization_buckets_path(organization) %>
 			<%= link_to organization, method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
-			  <i class='fa fa-trash'></i>
+			  <i class='fa fa-trash' title='remove organization'></i>
 			<% end %>
 		</div>
 	</div>

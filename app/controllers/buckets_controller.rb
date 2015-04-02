@@ -22,6 +22,15 @@ class BucketsController < ApplicationController
     end
   end
   
+  def update
+    @bucket = Bucket.find(params[:id])
+    if @bucket.update_attributes(bucket_params)
+      redirect_to organization_buckets_path(@organization)
+    else
+      redirect_to root_path, alert: "An error occurred."
+    end
+  end
+  
   def destroy
     @bucket = Bucket.find(params[:id])
     @bucket.destroy

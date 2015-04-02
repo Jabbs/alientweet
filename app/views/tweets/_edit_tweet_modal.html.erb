@@ -1,0 +1,33 @@
+<div class="modal" id="editTweetModal<%= tweet.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+    <div class="modal-content">
+			<div class="modal-header">
+				<i class='fa fa-pencil' style='margin-right:10px;'></i>
+				Edit Tweet:
+			</div>
+			<div class="modal-body">
+				<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+					<div class="row" style="margin-bottom:5px;">
+						<div class="col-md-12">
+							Name:
+						</div>
+					</div>
+					<div class="row small-bottom-margin">
+						<div class="col-md-12">
+							<%= f.text_area :copy, placeholder: "Body of tweet...", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "140" %>
+						</div>
+					</div>
+					
+					<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+					<div class="row">
+						<div class="col-md-12"><%= f.submit "Change", class: "btn btn-default" %></div>
+					</div>
+					
+				<% end %>
+
+				
+			</div>
+
+		</div>
+	</div>
+</div>

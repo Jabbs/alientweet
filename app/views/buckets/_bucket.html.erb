@@ -1,11 +1,17 @@
 <div id="<%= bucket.id %>-bucket">
 	<div class="row">
 		<div class="col-md-12" style="margin-bottom:10px;">
+			
 			<%= link_to bucket.name, organization_bucket_resources_path(@organization, bucket) %>
 			(<%= pluralize(bucket.resources.where(archived: false).size, "resource") %>, <%= pluralize(bucket.tweets.size, "tweet") %>)
+			
+			<a class="grey-link" data-toggle="modal" data-target="#editBucketModal<%= bucket.id %>" href="#" role="button"><i class='fa fa-pencil' title='edit bucket'></i></a>
+			<%= render "buckets/edit_bucket_modal", bucket: bucket %>
+			
 			<%= link_to [@organization, bucket], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
-			  <i class='fa fa-trash'></i>
+			  <i class='fa fa-trash' title='remove bucket'></i>
 			<% end %>
+			
 		</div>
 	</div>
 </div>
