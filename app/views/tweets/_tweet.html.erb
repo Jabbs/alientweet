@@ -19,15 +19,15 @@
 <div class="tweet <%= active_or_no %> <%= sent_or_no %>">
 	<% if show_bucket %>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<small>
-					<%= link_to(truncate(tweet.resource.extraction.title, length: 30), [@organization, tweet.resource.bucket, tweet.resource], title: tweet.resource.extraction.title) %>
+					<%= link_to(truncate(tweet.resource.extraction.title, length: 25), [@organization, tweet.resource.bucket, tweet.resource], title: tweet.resource.extraction.title) %>
 					<a href="<%= tweet.resource.url %>" target="_blank" class="grey-link-dark">
 						<i class='fa fa-file-image-o' title="external url"></i>
 					</a>
 				</small>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<small class="pull-right"><%= link_to tweet.resource.bucket.name, organization_bucket_resources_path(@organization, tweet.resource.bucket) %></small>
 			</div>
 		</div>
