@@ -183,9 +183,14 @@ h4 { line-height: 1.2em; }
 .tweet {
 	padding:5px 10px;
 	margin-bottom:10px;
-	background: $blue_light;
 	border: 1px solid $blue;
 	@include rounded_border;
+}
+.tweet.active {
+	background: $blue_light;
+}
+.tweet.sent {
+	background: $green;
 }
 
 #organizations {

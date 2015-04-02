@@ -18,5 +18,9 @@
 $('document').ready(function() {
 
 	$('#new_tweet').parsley();
+	
+	$('.tweet-copy').click(function() {
+		$(this).find("textarea").select();
+  });
 
 });

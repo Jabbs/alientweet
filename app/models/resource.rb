@@ -3,5 +3,5 @@ class Resource < ActiveRecord::Base
   has_one :extraction
   has_one :summarization
   has_one :hashtagging
-  has_many :tweets
+  has_many :tweets, dependent: :destroy
 end

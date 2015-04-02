@@ -13,7 +13,15 @@ class TweetsController < ApplicationController
   def update
     @tweet = Tweet.find(params[:id])
     if @tweet.update_attributes(tweet_params)
-      redirect_to organization_resources_path(@organization)
+      referrer = request.referer.split('/').last
+      logger.debug "REFERRER: #{referrer}"
+      if referrer == "buckets"
+        redirect_to organization_buckets_path(@organization)
+      elsif referrer == "resources"
+        redirect_to organization_resources_path(@organization)
+      else
+        redirect_to [@organization, @tweet.resource.bucket, @tweet.resource]
+      end
     else
       redirect_to root_path, alert: "An error occurred."
     end
@@ -22,7 +30,14 @@ class TweetsController < ApplicationController
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-    redirect_to [@organization, @bucket, @resource], notice: "Tweet removed."
+    referrer = request.referer.split('/').last
+    if referrer == "buckets"
+      redirect_to organization_buckets_path(@organization)
+    elsif referrer == "resources"
+      redirect_to organization_resources_path(@organization), notice: "Tweet removed."
+    else
+      redirect_to [@organization, @tweet.resource.bucket, @tweet.resource], notice: "Tweet removed."
+    end
   end
   
   private 
@@ -34,6 +49,6 @@ class TweetsController < ApplicationController
     end
     
     def tweet_params
-      params.require(:tweet).permit(:link, :copy, :approved, :resource_id)
+      params.require(:tweet).permit(:link, :copy, :approved, :resource_id, :sent, :last_approved_at, :last_sent_at)
     end
 end

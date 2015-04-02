@@ -1,4 +1,54 @@
-<small><%= tweet.copy %></small>
-<%= link_to [@organization, tweet.resource.bucket, tweet.resource, tweet], method: :delete, class: "grey-link-dark", data: { confirm: 'Are you sure?' } do %>
-  <i class='fa fa-trash'></i>
-<% end %>
+<% tweet.approved? ? active_or_no = "active" : active_or_no = "" %>
+<% tweet.sent? ? sent_or_no = "sent" : sent_or_no = "" %>
+<% action_name == "index" && controller_name == "buckets" ? show_bucket = true : show_bucket = false %>
+<div class="tweet <%= active_or_no %> <%= sent_or_no %>">
+	<div class="row">
+		<div class="col-md-12">
+			<% if show_bucket %>
+				<small class="pull-right"><%= link_to tweet.resource.bucket.name, organization_bucket_resources_path(@organization, tweet.resource.bucket) %></small>
+			<% end %>
+			<small class="tweet-copy">
+				<%= text_area_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;", rows: 3) %>
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1" style="padding-right:0px; width:35px;">
+			<%= link_to [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :delete, class: "grey-link-dark", data: { confirm: 'Are you sure?' } do %>
+			  <i class='fa fa-trash'></i>
+			<% end %>
+		</div>
+		<div class="col-md-3" style="padding-left:0px;padding-right:0px;">
+			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+				<% if tweet.approved == false %>
+					<%= f.hidden_field :approved, value: true %>
+					<%= f.hidden_field :last_approved_at, value: DateTime.now %>
+				<% else %>
+					<%= f.hidden_field :approved, value: false %>
+				<% end %>
+				<% if tweet.approved == false %>
+					<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover" %>
+				<% else %>
+					<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover" %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="col-md-5" style="padding-left:0px;padding-right:0px;">
+			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+				<% if tweet.sent == false %>
+					<%= f.hidden_field :sent, value: true %>
+					<%= f.hidden_field :last_sent_at, value: DateTime.now %>
+				<% else %>
+					<%= f.hidden_field :sent, value: false %>
+				<% end %>
+				<% if tweet.sent == false %>
+					<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover" %>
+				<% else %>
+					<%= f.submit "✓ Sent", class: "btn btn-xs btn-default btn-danger-hover" %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

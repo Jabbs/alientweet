@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401202458) do
+ActiveRecord::Schema.define(version: 20150402174153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,10 +88,12 @@ ActiveRecord::Schema.define(version: 20150401202458) do
     t.integer  "resource_id"
     t.string   "copy"
     t.string   "link"
-    t.boolean  "approved",    default: false
-    t.boolean  "sent",        default: false
+    t.boolean  "approved",         default: false
+    t.boolean  "sent",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_approved_at"
+    t.datetime "last_sent_at"
   end
 
   add_index "tweets", ["resource_id"], name: "index_tweets_on_resource_id", using: :btree

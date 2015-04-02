@@ -41,6 +41,27 @@
 						</div>
 					</div>
 				</div>
+				<hr class="blue-hr">
+				<div class="row">
+					<div class="col-md-4">
+						<h4 class="center">Unapproved</h4>
+						<% @unapproved_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet %>
+						<% end %>
+					</div>
+					<div class="col-md-4">
+						<h4 class="center">Approved</h4>
+						<% @approved_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet %>
+						<% end %>
+					</div>
+					<div class="col-md-4">
+						<h4 class="center">Sent</h4>
+						<% @sent_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet %>
+						<% end %>
+					</div>
+				</div>
 				
 			</div>
 		</div>
