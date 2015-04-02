@@ -1,9 +1,6 @@
 <div id="<%= resource.id %>-resource">
 	<div class="row">
-		<div class="col-md-1">
-			<%= resource.created_at.strftime('%-m/%d/%y') %>
-		</div>
-		<div class="col-md-5" style="margin-bottom:10px;">
+		<div class="col-md-6" style="margin-bottom:10px;">
 			<div class="row">
 				<div class="col-md-12">
 					<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>

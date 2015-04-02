@@ -7,6 +7,8 @@ class ResourcesController < ApplicationController
   
   def show
     @resource = Resource.find(params[:id])
+    @next_resource = @resource.next
+    @previous_resource = @resource.previous
     @tweet = Tweet.new(resource_id: @resource.id)
     @tweets = @resource.tweets
     if @resource.summarization.sentences.present?

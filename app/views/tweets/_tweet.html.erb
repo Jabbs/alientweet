@@ -1,12 +1,39 @@
 <% tweet.approved? ? active_or_no = "active" : active_or_no = "" %>
 <% tweet.sent? ? sent_or_no = "sent" : sent_or_no = "" %>
 <% action_name == "index" && controller_name == "buckets" ? show_bucket = true : show_bucket = false %>
-<div class="tweet <%= active_or_no %> <%= sent_or_no %>">
+
+<% if local_assigns[:date] %>
 	<div class="row">
 		<div class="col-md-12">
-			<% if show_bucket %>
+			<div class="pull-right">
+				<small style="color:grey;"><%= time_ago_in_words(date) %> ago.</small>
+			</div>
+		</div>
+	</div>
+<% end %>
+<div class="no-height">
+	<span class="tweet_resource_tag">
+		<%= tweet.resource.id %>
+	</span>
+</div>
+<div class="tweet <%= active_or_no %> <%= sent_or_no %>">
+	<% if show_bucket %>
+		<div class="row">
+			<div class="col-md-10">
+				<small>
+					<%= link_to(truncate(tweet.resource.extraction.title, length: 40), [@organization, tweet.resource.bucket, tweet.resource]) %>
+					<a href="<%= tweet.resource.url %>" target="_blank" class="grey-link-dark">
+						<i class='fa fa-file-image-o'></i>
+					</a>
+				</small>
+			</div>
+			<div class="col-md-2">
 				<small class="pull-right"><%= link_to tweet.resource.bucket.name, organization_bucket_resources_path(@organization, tweet.resource.bucket) %></small>
-			<% end %>
+			</div>
+		</div>
+	<% end %>
+	<div class="row">
+		<div class="col-md-12">
 			<small class="tweet-copy">
 				<%= text_area_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;", rows: 3) %>
 			</small>

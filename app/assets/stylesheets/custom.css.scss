@@ -185,7 +185,20 @@ h4 { line-height: 1.2em; }
 	margin-bottom:10px;
 	border: 1px solid $blue;
 	@include rounded_border;
+	margin-bottom: 25px;
 }
+.tweet_resource_tag {
+	background:white; 
+	border: 1px solid $blue;
+	@include rounded_border; 
+	position:relative;
+	top:-.8em;
+	left: -5px;
+	width: 2.5em;
+	z-index:5;
+	padding:2px 4px;
+}
+
 .tweet.active {
 	background: $blue_light;
 }
@@ -195,6 +208,13 @@ h4 { line-height: 1.2em; }
 
 #organizations {
 	padding:10px;
+}
+.article_body {
+	font-size: 130%;
+	weight: 200;
+	border: 1px solid $blue;
+	@include rounded_border;
+	padding: 10px;
 }
 
 a.grey-link {
