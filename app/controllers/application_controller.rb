@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  http_basic_authenticate_with :name => "petejabbour1@gmail.com", :password => "Jabbs@work1"
+  http_basic_authenticate_with :name => "learnmetrics", :password => "brooklyn99"
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
