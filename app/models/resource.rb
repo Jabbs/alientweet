@@ -5,6 +5,7 @@ class Resource < ActiveRecord::Base
   has_one :hashtagging
   has_many :tweets, dependent: :destroy
   
+  validates :url, presence: true, uniqueness: true
   
   def previous
     bucket_id = self.bucket.id
