@@ -50,7 +50,9 @@ class ResourcesController < ApplicationController
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
       @bucket = @organization.buckets.find(params[:bucket_id])
-      @resources = @bucket.resources.where(archived: false).joins(:extraction).order("extractions.title ASC")
+      # order by resource extraction title
+      # @resources = @bucket.resources.where(archived: false).joins(:extraction).order("extractions.title ASC")
+      @resources = @bucket.resources.where(archived: false).order("created_at DESC")
     end
     
     def resource_params

@@ -12,7 +12,7 @@
 	</div>
 <% end %>
 <div class="no-height">
-	<span class="tweet_resource_tag">
+	<span class="tweet_resource_tag corner">
 		<%= tweet.resource.id %>
 	</span>
 </div>
@@ -23,7 +23,7 @@
 				<small>
 					<%= link_to(truncate(tweet.resource.extraction.title, length: 40), [@organization, tweet.resource.bucket, tweet.resource]) %>
 					<a href="<%= tweet.resource.url %>" target="_blank" class="grey-link-dark">
-						<i class='fa fa-file-image-o'></i>
+						<i class='fa fa-file-image-o' title="link to URL"></i>
 					</a>
 				</small>
 			</div>

@@ -191,12 +191,15 @@ h4 { line-height: 1.2em; }
 	background:white; 
 	border: 1px solid $blue;
 	@include rounded_border; 
+	width: 2.5em;
+	padding:2px 4px;
+	margin-right: 5px;
+}
+.tweet_resource_tag.corner {
 	position:relative;
 	top:-.8em;
 	left: -5px;
-	width: 2.5em;
 	z-index:5;
-	padding:2px 4px;
 }
 
 .tweet.active {

@@ -12,12 +12,12 @@ class OrganizationsController < ApplicationController
   
   def all_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources.where(archived: false)
+    @resources = @organization.resources.where(archived: false).order("created_at DESC")
   end
   
   def archived_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources.where(archived: true)
+    @resources = @organization.resources.where(archived: true).order("created_at DESC")
   end
   
   def create

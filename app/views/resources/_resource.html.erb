@@ -3,6 +3,9 @@
 		<div class="col-md-6" style="margin-bottom:10px;">
 			<div class="row">
 				<div class="col-md-12">
+					<span class="tweet_resource_tag">
+						<%= resource.id %>
+					</span>
 					<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>
 					<%= link_to [@organization, resource.bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
 					  <i class='fa fa-trash'></i>

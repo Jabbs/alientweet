@@ -47,20 +47,7 @@
 						</h3>
 					</div>
 					<div class="col-md-2">
-						<%= form_for [@resource.bucket.organization, @resource.bucket, @resource], method: :put do |f| %>
-							<%= f.hidden_field :bucket_id, value: @resource.bucket.id %>
-							<% if @resource.archived == false %>
-								<%= f.hidden_field :archived, value: true %>
-								<%= f.hidden_field :last_archived_at, value: DateTime.now %>
-							<% else %>
-								<%= f.hidden_field :archived, value: false %>
-							<% end %>
-							<% if @resource.archived == false %>
-								<%= f.submit "Archive", class: "btn btn-default btn-success-hover pull-right" %>
-							<% else %>
-								<%= f.submit "✓ Archived", class: "btn btn-default btn-danger-hover pull-right" %>
-							<% end %>
-						<% end %>
+						<%= render "resources/archive_form", resource: @resource %>
 					</div>
 				</div>
 				
