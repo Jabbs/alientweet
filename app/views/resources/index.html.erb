@@ -6,6 +6,7 @@
 			<%= link_to "#{@organization.name}", organization_buckets_path(@organization) %>
 			/
 			<%= @bucket.name %>
+			<div class="pull-right"><%= link_to "All #{@organization.name} Resources", organization_resources_path(@organization) %></div>
 		</div>
 	</div>
 	<div class="row">

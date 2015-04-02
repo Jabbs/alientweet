@@ -10,6 +10,11 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
   
+  def resources
+    @organization = Organization.find(params[:organization_id])
+    @resources = @organization.resources
+  end
+  
   def create
     @organization = Organization.new(organization_params)
     if @organization.save

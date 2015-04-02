@@ -3,16 +3,50 @@
 		<div class="col-md-1">
 			<%= resource.created_at.strftime('%-m/%d/%y') %>
 		</div>
-		<div class="col-md-6" style="margin-bottom:10px;">
-			<%= link_to resource.extraction.title, [@organization, @bucket, resource] %>
-			<%= link_to [@organization, @bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
-			  <i class='fa fa-trash'></i>
-			<% end %>
+		<div class="col-md-5" style="margin-bottom:10px;">
+			<div class="row">
+				<div class="col-md-12">
+					<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>
+					<%= link_to [@organization, resource.bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+					  <i class='fa fa-trash'></i>
+					<% end %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<% if resource.hashtagging %>
+						<small><%= resource.hashtagging.hashtags.first(10).to_sentence %></small>
+					<% end %>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-5">
-			<% if resource.hashtagging %>
-				<small><%= resource.hashtagging.hashtags.first(10).to_sentence %></small>
+		<div class="col-md-6">
+			<% resource.tweets.each_with_index do |tweet, index| %>
+				<div class="row">
+					<div class="col-md-1">
+						<%= form_for [@organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+							<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+							<% if tweet.approved == false %>
+								<%= f.hidden_field :approved, value: true %>
+							<% else %>
+								<%= f.hidden_field :approved, value: false %>
+							<% end %>
+							<% if tweet.approved == false %>
+								<%= f.submit "+", class: "btn btn-default btn-success-hover" %>
+							<% else %>
+								<%= f.submit "✓", class: "btn btn-default btn-danger-hover" %>
+							<% end %>
+							
+						<% end %>
+					</div>
+					<div class="col-md-11">
+						<div class="tweet">
+							<%= render "tweets/tweet", tweet: tweet %>
+						</div>
+					</div>
+				</div>
 			<% end %>
 		</div>
 	</div>
+	<hr class="blue-hr">
 </div>

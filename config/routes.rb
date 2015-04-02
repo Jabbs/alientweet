@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :organizations do
+    get "resources"
     resources :buckets do
       resources :resources do
         resources :tweets

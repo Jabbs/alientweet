@@ -4,6 +4,7 @@
 			<%= link_to "Organizations", root_path %>
 			/
 			<%= @organization.name %>
+			<div class="pull-right"><%= link_to "All #{@organization.name} Resources", organization_resources_path(@organization) %></div>
 		</div>
 	</div>
 	<div class="row">

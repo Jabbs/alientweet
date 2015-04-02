@@ -1,0 +1,4 @@
+<small><%= tweet.copy %></small>
+<%= link_to [@organization, tweet.resource.bucket, tweet.resource, tweet], method: :delete, class: "grey-link-dark", data: { confirm: 'Are you sure?' } do %>
+  <i class='fa fa-trash'></i>
+<% end %>

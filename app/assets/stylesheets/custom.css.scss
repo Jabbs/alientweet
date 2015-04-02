@@ -25,6 +25,7 @@ $orange: rgb(251,185,11);
 $orange2: #ffcc11;
 $orange3: #ffc414;
 $blue: rgb(23, 54, 93);
+$blue_light: #BFD1FF;
 $blue_green: #6DD0CE;
 $grey_dark: #686868;
 $grey_light: rgb(213, 215, 214);
@@ -76,6 +77,7 @@ $body_grey: #4a4a4a;
 .orange {color: lighten($orange, 10%);}
 .orange-dark {color: darken($orange, 8%);}
 .red {color: $red;}
+.blue-light { color: $blue_light;}
 .blue {color: $blue;}
 .black {color: black;}
 .grey {color: $grey;}
@@ -179,9 +181,11 @@ h4 { line-height: 1.2em; }
 }
 
 .tweet {
-	padding:5px;
+	padding:5px 10px;
 	margin-bottom:10px;
+	background: $blue_light;
 	border: 1px solid $blue;
+	@include rounded_border;
 }
 
 #organizations {
@@ -191,4 +195,39 @@ h4 { line-height: 1.2em; }
 a.grey-link {
 	color:darken($grey, 10%);
 	&:hover {text-decoration:none;color: $grey_dark;}
+}
+a.grey-link-dark {
+	color: $grey_dark;
+	&:hover {text-decoration:none;color: darken($grey_dark, 10%);}
+}
+
+.btn-success-hover {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-success-hover:hover,
+.btn-success-hover:focus,
+.btn-success-hover.focus,
+.btn-success-hover:active,
+.btn-success-hover.active,
+.open > .dropdown-toggle.btn-success {
+  color: #fff;
+  background-color: $green;
+  border-color: #4cae4c;
+}
+.btn-danger-hover {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-danger-hover:hover,
+.btn-danger-hover:focus,
+.btn-danger-hover.focus,
+.btn-danger-hover:active,
+.btn-danger-hover.active,
+.open > .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
 }

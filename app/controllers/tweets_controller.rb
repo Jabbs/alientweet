@@ -10,6 +10,15 @@ class TweetsController < ApplicationController
     end
   end
   
+  def update
+    @tweet = Tweet.find(params[:id])
+    if @tweet.update_attributes(tweet_params)
+      redirect_to organization_resources_path(@organization)
+    else
+      redirect_to root_path, alert: "An error occurred."
+    end
+  end
+  
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
@@ -25,6 +34,6 @@ class TweetsController < ApplicationController
     end
     
     def tweet_params
-      params.require(:tweet).permit(:link, :copy)
+      params.require(:tweet).permit(:link, :copy, :approved, :resource_id)
     end
 end

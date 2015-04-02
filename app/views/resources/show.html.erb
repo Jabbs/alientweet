@@ -8,6 +8,7 @@
 			<%= link_to @bucket.name, organization_bucket_resources_path(@organization, @bucket) %>
 			/
 			<%= @resource.extraction.title %>
+			<div class="pull-right"><%= link_to "All #{@organization.name} Resources", organization_resources_path(@organization) %></div>
 		</div>
 	</div>
 	<div class="row">
@@ -18,10 +19,7 @@
 						<div class="col-md-2"></div>
 						<div class="col-md-10">
 							<div class="tweet">
-								<%= tweet.copy %>
-								<%= link_to [@organization, @bucket, @resource, tweet], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
-								  <i class='fa fa-trash'></i>
-								<% end %>
+								<%= render "tweets/tweet", tweet: tweet %>
 							</div>
 						</div>
 					</div>
