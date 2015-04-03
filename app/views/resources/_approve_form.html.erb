@@ -1,0 +1,14 @@
+<%= form_for [resource.bucket.organization, resource.bucket, resource], method: :put, html: {class: "inline"} do |f| %>
+	<%= f.hidden_field :bucket_id, value: resource.bucket.id %>
+	<% if resource.approved == false %>
+		<%= f.hidden_field :approved, value: true %>
+		<%= f.hidden_field :last_approved_at, value: DateTime.now %>
+	<% else %>
+		<%= f.hidden_field :approved, value: false %>
+	<% end %>
+	<% if resource.approved == false %>
+		<%= f.submit "Approve", class: "btn btn-default #{btn_size} btn-success-hover #{placement}" %>
+	<% else %>
+		<%= f.submit "✓ Approved", class: "btn btn-default #{btn_size} btn-success #{placement}" %>
+	<% end %>
+<% end %>

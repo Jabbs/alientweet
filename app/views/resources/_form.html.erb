@@ -1,6 +1,15 @@
 <div class="well">
 	<%= form_for [@organization, @bucket, @resource] do |f| %>
 		<div class="row small-bottom-margin">
+			<div class="col-md-6">
+				<%= f.collection_select :contributor_id, @organization.contributors, :id, :name, {prompt: "Select a contributor"}, {class: "form-control"} %>
+			</div>
+			<div class="col-md-6">
+				<input class="datepicker" id="resource_article_date" placeholder="mm/dd/yyyy" name="resource[article_date]" data-date-format="mm/dd/yyyy">
+				(date of resource)
+			</div>
+		</div>
+		<div class="row small-bottom-margin">
 			<div class="col-md-12">
 				URL:
 				<%= f.text_field :url, placeholder: "http://www...", autocomplete: :off, autofocus: true, style: "width:100%;" %>

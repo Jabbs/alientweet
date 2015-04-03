@@ -6,6 +6,7 @@ class ResourcesController < ApplicationController
   end
   
   def show
+    @reading = Reading.new
     @resource = Resource.find(params[:id])
     @next_resource = @resource.next
     @previous_resource = @resource.previous
@@ -20,6 +21,7 @@ class ResourcesController < ApplicationController
   
   def update
     @resource = Resource.find(params[:id])
+    fix_date_month_order
     if @resource.update_attributes(resource_params)
       referrer = request.referer.split('/').last
       logger.debug "REFERRER: #{referrer}"
@@ -34,6 +36,7 @@ class ResourcesController < ApplicationController
   end
   
   def create
+    fix_date_month_order
     @resource = @bucket.resources.build(resource_params)
     if @resource.save
       Alien.create_extraction(@resource)
@@ -51,7 +54,11 @@ class ResourcesController < ApplicationController
     redirect_to organization_bucket_resources_path(@organization, @bucket), notice: "Resource removed."
   end
   
-  private 
+  private
+  
+    def fix_date_month_order
+      params[:resource][:article_date] = Date.strptime(params[:resource][:article_date],'%m/%d/%Y') if params[:resource][:article_date].present?
+    end
   
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
@@ -62,6 +69,7 @@ class ResourcesController < ApplicationController
     end
     
     def resource_params
-      params.require(:resource).permit(:name, :url, :html, :last_archived_at, :archived, :bucket_id, :article_date)
+      params.require(:resource).permit(:name, :url, :html, :last_archived_at, :archived, :bucket_id, :article_date, 
+                                       :contributor_id, :article_date, :approved, :last_approved_at)
     end
 end

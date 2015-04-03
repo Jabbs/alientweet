@@ -1,0 +1,6 @@
+<% unless resource.readers.include?(contributor) %>
+	<%= form_for [resource.bucket.organization, resource.bucket, resource, @reading], html: {:class => "inline"} do |f| %>
+		<%= f.hidden_field :contributor_id, value: contributor.id %>
+		<%= f.submit "Read by #{contributor.name}", class: "btn btn-default btn-xs btn-info-hover" %>
+	<% end %>
+<% end %>

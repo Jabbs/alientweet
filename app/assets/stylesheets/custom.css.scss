@@ -247,6 +247,21 @@ a.grey-link-dark {
   background-color: $green;
   border-color: #4cae4c;
 }
+.btn-info-hover {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-info-hover:hover,
+.btn-info-hover:focus,
+.btn-info-hover.focus,
+.btn-info-hover:active,
+.btn-info-hover.active,
+.open > .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
 .btn-danger-hover {
   color: #333;
   background-color: #fff;

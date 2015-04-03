@@ -10,6 +10,11 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
   
+  def unread_resources
+    @organization = Organization.find(params[:organization_id])
+    @resources = @organization.resources.where(read: false).order("created_at DESC")
+  end
+  
   def all_resources
     @organization = Organization.find(params[:organization_id])
     @resources = @organization.resources.where(archived: false).order("created_at DESC")
@@ -18,6 +23,11 @@ class OrganizationsController < ApplicationController
   def archived_resources
     @organization = Organization.find(params[:organization_id])
     @resources = @organization.resources.where(archived: true).order("created_at DESC")
+  end
+  
+  def approved_resources
+    @organization = Organization.find(params[:organization_id])
+    @resources = @organization.resources.where(approved: true).order("created_at DESC")
   end
   
   def create

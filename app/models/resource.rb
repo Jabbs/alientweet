@@ -5,6 +5,8 @@ class Resource < ActiveRecord::Base
   has_one :summarization
   has_one :hashtagging
   has_many :tweets, dependent: :destroy
+  has_many :readings, as: :readable, dependent: :destroy
+  has_many :readers, through: :readings, source: :contributor
   
   validates :url, presence: true, uniqueness: true
   
@@ -15,6 +17,18 @@ class Resource < ActiveRecord::Base
 
   def next
     Resource.where(bucket_id: bucket_id).limit(1).order("id ASC").where("id > ?", id).first
+  end
+  
+  def has_been_read
+    self.read = true
+    self.save!
+  end
+  
+  def check_if_still_read
+    if self.readings.size == 0
+      self.read = false
+      self.save!
+    end
   end
   
 end

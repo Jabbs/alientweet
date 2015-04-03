@@ -8,9 +8,7 @@
 			<%= @bucket.name %>
 			<div class="pull-right">
 				Resources:
-				<%= link_to "Archived", organization_archived_resources_path(@organization) %>
-				|
-				<%= link_to "All", organization_all_resources_path(@organization) %>
+				<%= render "shared/resource_links" %>
 			</div>
 		</div>
 	</div>

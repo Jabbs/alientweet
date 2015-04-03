@@ -6,7 +6,12 @@
 					<span class="tweet_resource_tag">
 						<%= resource.id %>
 					</span>
-					<%= link_to resource.extraction.title, [@organization, resource.bucket, resource], style: "margin-right:3px;" %>
+					<% if resource.article_date %>
+						<% title_text = "(" + resource.article_date.strftime('%-m/%-d') + ") " + resource.extraction.title %>
+					<% else %>
+						<% title_text = resource.extraction.title %>
+					<% end %>
+					<%= link_to title_text, [@organization, resource.bucket, resource], style: "margin-right:3px;" %>
 					<a href="<%= resource.url %>" target="_blank" class="grey-link-dark">
 						<i class='fa fa-file-image-o' title="external url"></i>
 					</a>
@@ -16,22 +21,22 @@
 				</div>
 			</div>
 			<div class="row small-bottom-margin">
-				<div class="col-md-2" style="width:60px;">
-					<%= render "resources/archive_form", resource: resource, btn_size: "btn-xs", placement: "" %>
-				</div>
-				<div class="col-md-10">
+				<div class="col-md-12">
 					<small>
 						Bucket: <%= link_to resource.bucket.name, organization_bucket_resources_path(@organization, resource.bucket) %>
 						|
-						Added: <%= resource.created_at.strftime('%-m/%d/%y, %-l:%M%P') %>
+						Added: <%= resource.created_at.strftime('%-m/%d/%y %-l:%M%P') %>
+						<% if resource.contributor.present? %>
+						|
+						added by <%= resource.contributor.name %>
+						<% end %>
 					</small>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<% if resource.hashtagging %>
-						<small><%= resource.hashtagging.hashtags.first(10).join(" ") %></small>
-					<% end %>
+					<%= render "resources/approve_form", resource: resource, btn_size: "btn-xs", placement: "" %>
+					<%= render "resources/archive_form", resource: resource, btn_size: "btn-xs", placement: "" %>
 				</div>
 			</div>
 

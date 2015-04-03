@@ -1,0 +1,1 @@
+<%= link_to "<i class='fa fa-check'></i> Read by #{reading.contributor.name}".html_safe, [@resource.bucket.organization, @resource.bucket, @resource, reading], method: :delete, title: "Unread this", class: "btn btn-info btn-xs" %>

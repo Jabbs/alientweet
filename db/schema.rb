@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403163532) do
+ActiveRecord::Schema.define(version: 20150403194942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,17 @@ ActiveRecord::Schema.define(version: 20150403163532) do
     t.datetime "updated_at"
   end
 
+  create_table "readings", force: true do |t|
+    t.string   "readable_type"
+    t.integer  "readable_id"
+    t.integer  "contributor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "readings", ["contributor_id"], name: "index_readings_on_contributor_id", using: :btree
+  add_index "readings", ["readable_type", "readable_id"], name: "index_readings_on_readable_type_and_readable_id", using: :btree
+
   create_table "resources", force: true do |t|
     t.string   "name"
     t.string   "url"
@@ -83,6 +94,8 @@ ActiveRecord::Schema.define(version: 20150403163532) do
     t.datetime "last_archived_at"
     t.string   "signature",        default: ""
     t.integer  "contributor_id"
+    t.datetime "article_date"
+    t.datetime "last_approved_at"
   end
 
   add_index "resources", ["bucket_id"], name: "index_resources_on_bucket_id", using: :btree

@@ -16,6 +16,9 @@
 //= require_tree .
 
 $('document').ready(function() {
+	
+	// https://bootstrap-datepicker.readthedocs.org/en/release/
+	$('.datepicker').datepicker()
 
 	$('#new_tweet').parsley();
 	$('.edit_tweet').parsley();
