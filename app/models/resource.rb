@@ -1,5 +1,6 @@
 class Resource < ActiveRecord::Base
   belongs_to :bucket
+  belongs_to :contributor
   has_one :extraction
   has_one :summarization
   has_one :hashtagging

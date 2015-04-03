@@ -13,7 +13,7 @@
 <% end %>
 <div class="no-height">
 	<span class="tweet_resource_tag corner">
-		<%= tweet.resource.id %>
+		<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
 	</span>
 </div>
 <div class="tweet <%= active_or_no %> <%= sent_or_no %>">

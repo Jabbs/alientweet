@@ -14,7 +14,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 class="green">AlienText + Twitter</h1>
+			<h1 class="green">
+				<%= link_to "AlienText + Twitter", root_path %>
+				<small><a data-toggle="modal" data-target="#helpModal" href="#" class="pull-right"><i class='fa fa-question-circle' title='Help'></i></a></small>
+			</h1>
+			<%= render 'shared/help_modal' %>
 		</div>
 	</div>
 </div>

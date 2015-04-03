@@ -21,7 +21,13 @@ class ResourcesController < ApplicationController
   def update
     @resource = Resource.find(params[:id])
     if @resource.update_attributes(resource_params)
-      redirect_to [@organization, @resource.bucket, @resource]
+      referrer = request.referer.split('/').last
+      logger.debug "REFERRER: #{referrer}"
+      if referrer == "all_resources"
+        redirect_to organization_all_resources_path(@organization)
+      else
+        redirect_to [@organization, @resource.bucket, @resource]
+      end
     else
       redirect_to root_path, alert: "An error occurred."
     end
@@ -56,6 +62,6 @@ class ResourcesController < ApplicationController
     end
     
     def resource_params
-      params.require(:resource).permit(:name, :url, :html, :last_archived_at, :archived, :bucket_id)
+      params.require(:resource).permit(:name, :url, :html, :last_archived_at, :archived, :bucket_id, :article_date)
     end
 end

@@ -17,4 +17,18 @@ $('document').ready(function() {
 		$("#new-bucket").show();
 		$("#cancel-bucket").hide();
 	});
+	$('#new-contributor').click(function (e) {
+		e.preventDefault();
+		$("#contributor-form").fadeIn(400);
+		$("#new-contributor").hide();
+		$("#cancel-contributor").show();
+		$('#contributor_name').focus();
+	});
+	$('#cancel-contributor').click(function (e) {
+		e.preventDefault();
+		$("#contributor_name").val("");
+		$("#contributor-form").hide();
+		$("#new-contributor").show();
+		$("#cancel-contributor").hide();
+	});
 });

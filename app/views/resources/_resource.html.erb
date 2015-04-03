@@ -6,14 +6,20 @@
 					<span class="tweet_resource_tag">
 						<%= resource.id %>
 					</span>
-					<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>
+					<%= link_to resource.extraction.title, [@organization, resource.bucket, resource], style: "margin-right:3px;" %>
+					<a href="<%= resource.url %>" target="_blank" class="grey-link-dark">
+						<i class='fa fa-file-image-o' title="external url"></i>
+					</a>
 					<%= link_to [@organization, resource.bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
 					  <i class='fa fa-trash'></i>
 					<% end %>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
+			<div class="row small-bottom-margin">
+				<div class="col-md-2" style="width:60px;">
+					<%= render "resources/archive_form", resource: resource, btn_size: "btn-xs", placement: "" %>
+				</div>
+				<div class="col-md-10">
 					<small>
 						Bucket: <%= link_to resource.bucket.name, organization_bucket_resources_path(@organization, resource.bucket) %>
 						|
@@ -28,6 +34,7 @@
 					<% end %>
 				</div>
 			</div>
+
 		</div>
 		<div class="col-md-6">
 			<% resource.tweets.each_with_index do |tweet, index| %>

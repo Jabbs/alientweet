@@ -3,6 +3,8 @@ class BucketsController < ApplicationController
   
   def index
     @bucket = Bucket.new(organization_id: @organization.id)
+    @contributor = Contributor.new(organization_id: @organization.id)
+    @contributors = @organization.contributors.order("name ASC")
     @tweets = @organization.tweets
     @unapproved_tweets = @tweets.where(approved: false).where(sent: false)
     @approved_tweets = @tweets.where(approved: true).where(sent: false)

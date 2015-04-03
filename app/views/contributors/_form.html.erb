@@ -1,0 +1,10 @@
+<%= form_for [@organization, @contributor] do |f| %>
+	<div class="row">
+		<div class="col-md-12 small-bottom-margin">
+			<div class="pull-right">
+				<%= f.text_field :name, placeholder: "Enter name here...", autocomplete: :off, required: true, autofocus: true %>
+				<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
+			</div>
+		</div>
+	</div>
+<% end %>

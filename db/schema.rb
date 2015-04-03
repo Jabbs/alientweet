@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402191618) do
+ActiveRecord::Schema.define(version: 20150403163532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20150402191618) do
   end
 
   add_index "buckets", ["organization_id"], name: "index_buckets_on_organization_id", using: :btree
+
+  create_table "contributors", force: true do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contributors", ["organization_id"], name: "index_contributors_on_organization_id", using: :btree
 
   create_table "extractions", force: true do |t|
     t.integer  "resource_id",              null: false
@@ -72,6 +81,8 @@ ActiveRecord::Schema.define(version: 20150402191618) do
     t.boolean  "approved",         default: false
     t.boolean  "archived",         default: false
     t.datetime "last_archived_at"
+    t.string   "signature",        default: ""
+    t.integer  "contributor_id"
   end
 
   add_index "resources", ["bucket_id"], name: "index_resources_on_bucket_id", using: :btree

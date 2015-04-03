@@ -7,8 +7,8 @@
 		<%= f.hidden_field :archived, value: false %>
 	<% end %>
 	<% if resource.archived == false %>
-		<%= f.submit "Archive", class: "btn btn-default btn-success-hover pull-right" %>
+		<%= f.submit "Archive", class: "btn btn-default #{btn_size} btn-success-hover #{placement}" %>
 	<% else %>
-		<%= f.submit "✓ Archived", class: "btn btn-default btn-danger-hover pull-right" %>
+		<%= f.submit "✓ Archived", class: "btn btn-default #{btn_size} btn-danger-hover #{placement}" %>
 	<% end %>
 <% end %>

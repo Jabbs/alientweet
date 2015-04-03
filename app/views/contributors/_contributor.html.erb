@@ -1,0 +1,18 @@
+<div id="<%= contributor.id %>-contributor">
+	<div class="row">
+		<div class="col-md-12" style="margin-bottom:10px;">
+			
+
+				<%= contributor.name %>
+
+				<a class="grey-link" data-toggle="modal" data-target="#editContributorModal<%= contributor.id %>" href="#" role="button"><i class='fa fa-pencil' title='edit contributor'></i></a>
+				<%= render "contributors/edit_contributor_modal", contributor: contributor %>
+
+				<%= link_to [@organization, contributor], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+				  <i class='fa fa-trash' title='remove contributor'></i>
+				<% end %>
+
+			
+		</div>
+	</div>
+</div>
