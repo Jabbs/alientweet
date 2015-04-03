@@ -17,6 +17,11 @@
 
 $('document').ready(function() {
 	
+	$('.hashtag').click(function() {
+		var text = $(this).text();
+		document.getElementById("tweet_copy").value += text;
+  });
+	
 	// https://bootstrap-datepicker.readthedocs.org/en/release/
 	$('.datepicker').datepicker()
 

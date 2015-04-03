@@ -42,7 +42,7 @@
 	<div class="row">
 		<div class="col-md-5">
 			<% if tweet.contributor %>
-				<small><em>by <%= tweet.contributor.name %></em></small>
+				<small>by <%= tweet.contributor.name %></small>
 			<% end %>
 			<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
 			<%= render "tweets/edit_tweet_modal", tweet: tweet %>

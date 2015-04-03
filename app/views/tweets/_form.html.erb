@@ -9,6 +9,11 @@
 			<%= f.text_area :copy, placeholder: "Body of tweet...", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "118" %>
 		</div>
 	</div>
+	<ol>
+	<li class="hashtag"> #Hello</li>
+	<li class="hashtag"> #World</li>
+	<li class="hashtag"> #Earthlings</li>
+	</ol>
 	<div class="row">
 		<div class="col-md-12">
 			<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
