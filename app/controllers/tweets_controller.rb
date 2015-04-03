@@ -53,6 +53,6 @@ class TweetsController < ApplicationController
     end
     
     def tweet_params
-      params.require(:tweet).permit(:link, :copy, :approved, :resource_id, :sent, :last_approved_at, :last_sent_at)
+      params.require(:tweet).permit(:link, :copy, :approved, :resource_id, :sent, :last_approved_at, :last_sent_at, :contributor_id)
     end
 end

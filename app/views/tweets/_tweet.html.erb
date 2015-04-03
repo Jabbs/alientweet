@@ -40,8 +40,10 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2">
-			
+		<div class="col-md-5">
+			<% if tweet.contributor %>
+				<small><em>by <%= tweet.contributor.name %></em></small>
+			<% end %>
 			<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
 			<%= render "tweets/edit_tweet_modal", tweet: tweet %>
 			
@@ -49,7 +51,7 @@
 			  <i class='fa fa-trash' title='remove tweet'></i>
 			<% end %>
 		</div>
-		<div class="col-md-3 col-md-offset-4">
+		<div class="col-md-3 col-md-offset-1">
 			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
 				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
 				<% if tweet.approved == false %>

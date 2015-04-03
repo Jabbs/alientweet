@@ -1,15 +1,19 @@
-
-	<%= form_for [@organization, @bucket, @resource, @tweet] do |f| %>
-		<div class="row">
-			<div class="col-md-12">
-				<%= f.text_area :copy, placeholder: "Body of tweet...", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "118" %>
-			</div>
+<%= form_for [@organization, @bucket, @resource, @tweet] do |f| %>
+	<div class="row">
+		<div class="col-md-12">
+			<%= f.collection_select :contributor_id, @organization.contributors, :id, :name, {prompt: "Select a contributor"}, {class: "form-control"} %>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
-			</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<%= f.text_area :copy, placeholder: "Body of tweet...", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "118" %>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
+		</div>
+	</div>
 
-	<% end %>
-	
+<% end %>
+
