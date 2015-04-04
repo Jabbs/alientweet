@@ -8,7 +8,7 @@ class Resource < ActiveRecord::Base
   has_many :readings, as: :readable, dependent: :destroy
   has_many :readers, through: :readings, source: :contributor
   
-  validates :url, presence: true, uniqueness: true
+  validates :url, presence: true, uniqueness: {scope: :bucket}
   
   def previous
     bucket_id = self.bucket.id
