@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get "archived_resources"
     get "approved_resources"
     get "unread_resources"
+    resources :timesheets
     resources :contributors
     resources :buckets do
       resources :resources do

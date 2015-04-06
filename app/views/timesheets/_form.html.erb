@@ -1,0 +1,56 @@
+<%= form_for [@organization, timesheet] do |f| %>
+
+
+	<div class="row small-bottom-margin">
+		<div class="col-md-6">
+			<input class="datepicker" id="timesheet_day_start" placeholder="mm/dd/yyyy" name="timesheet[day_start]" data-date-format="mm/dd/yyyy" required>
+			(start)
+		</div>
+		<div class="col-md-6">
+			<input class="datepicker" id="timesheet_day_end" placeholder="mm/dd/yyyy" name="timesheet[day_end]" data-date-format="mm/dd/yyyy" required>
+			(end)
+		</div>
+	</div>
+	<hr>
+	<div class="row small-bottom-margin">
+		<div class="col-md-12">
+			Tweets per day:
+			<%= f.select :tweets_per_day, [1,2,3,4], style: "width:100%;" %>
+		</div>
+	</div>
+	<hr>
+	<div class="row small-bottom-margin">
+		<div class="col-md-12">
+			Timeslot 1:
+			<%= f.time_select :time_slot1, style: "width:100%;", :default => {:hour => '7', :minute => '00'} %>
+			<small>(default: 7am)</small>
+		</div>
+	</div>
+	<div class="row small-bottom-margin">
+		<div class="col-md-12">
+			Timeslot 2:
+			<%= f.time_select :time_slot2, style: "width:100%;", :default => {:hour => '11', :minute => '00'} %>
+			<small>(default: 11am)</small>
+		</div>
+	</div>
+	<div class="row small-bottom-margin">
+		<div class="col-md-12">
+			Timeslot 3:
+			<%= f.time_select :time_slot3, style: "width:100%;", :default => {:hour => '15', :minute => '00'} %>
+			<small>(default: 3pm)</small>
+		</div>
+	</div>
+	<div class="row small-bottom-margin">
+		<div class="col-md-12">
+			Timeslot 4:
+			<%= f.time_select :time_slot4, style: "width:100%;", :default => {:hour => '17', :minute => '00'} %>
+			<small>(default: 5pm)</small>
+		</div>
+	</div>
+	<hr>
+	<%= f.hidden_field :organization_id, value: @organization.id %>
+	<div class="row">
+		<div class="col-md-12"><%= f.submit "Submit", data: { disable_with: "Submitting..." }, class: "btn btn-primary pull-right" %></div>
+	</div>
+	
+<% end %>

@@ -31,6 +31,9 @@ $('document').ready(function() {
 	$('.tweet-copy').click(function() {
 		$(this).find("textarea").select();
   });
+	$('.tweet-copy-sm').click(function() {
+		$(this).find("input").select();
+  });
 	$('.tweet-url').click(function() {
 		$(this).find("input").select();
   });

@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-1">
+		<span class="tweet_resource_tag">
+			<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
+		</span>
+	</div>
+	<div class="col-md-5">
+		<small class="tweet-copy-sm">
+			<%= text_field_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;") %>
+		</small>
+	</div>
+	<div class="col-md-5">
+		<small class="tweet-url">
+			<%= text_field_tag("Tweet url", tweet.resource.url, style: "width:100%;") %>
+		</small>
+	</div>
+	<div class="col-md-1">
+		<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+			<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+			<% if tweet.sent == false %>
+				<%= f.hidden_field :sent, value: true %>
+				<%= f.hidden_field :last_sent_at, value: DateTime.now %>
+			<% else %>
+				<%= f.hidden_field :sent, value: false %>
+			<% end %>
+			<% if tweet.sent == false %>
+				<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
+			<% else %>
+				<%= f.submit "✓ Sent", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
+			<% end %>
+		<% end %>
+	</div>
+</div>

@@ -1,5 +1,6 @@
 <% tweet.approved? ? active_or_no = "active" : active_or_no = "" %>
 <% tweet.sent? ? sent_or_no = "sent" : sent_or_no = "" %>
+<% tweet.disproved? ? grey_or_no = "grey-background" : grey_or_no = "" %>
 <% action_name == "index" && controller_name == "buckets" ? show_bucket = true : show_bucket = false %>
 
 <% if local_assigns[:date] %>
@@ -16,7 +17,7 @@
 		<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
 	</span>
 </div>
-<div class="tweet <%= active_or_no %> <%= sent_or_no %>">
+<div class="tweet <%= active_or_no %> <%= sent_or_no %> <%= grey_or_no %>">
 	<% if show_bucket %>
 		<div class="row">
 			<div class="col-md-7">
@@ -49,10 +50,10 @@
 	<div class="row">
 		<div class="col-md-5">
 			<% if tweet.contributor %>
-				<small>by <%= tweet.contributor.name %></small>
+				<small>by <%= tweet.contributor.name %> | </small>
 			<% end %>
 			<% tweet.comments.any? ? darken = "" : darken = "-o" %>
-			<a class="grey-link-dark" data-toggle="modal" data-target="#commentModalTweet<%= tweet.id %>" href="#" role="button"><i class="fa fa-comment<%= darken %>" title='comments'></i></a>
+			<a class="grey-link-dark" data-toggle="modal" data-target="#commentModalTweet<%= tweet.id %>" href="#" role="button"><%= tweet.comments.count if tweet.comments.any? %> <i class="fa fa-comment<%= darken %>" title='comments'></i></a>
 			<%= render "comments/comments_tweet_modal", tweet: tweet %>
 			
 			<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
@@ -89,6 +90,20 @@
 					<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
 				<% else %>
 					<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
+				<% end %>
+			<% end %>
+			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
+				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+				<% if tweet.disproved == false %>
+					<%= f.hidden_field :disproved, value: true %>
+					<%= f.hidden_field :last_disproved_at, value: DateTime.now %>
+				<% else %>
+					<%= f.hidden_field :disproved, value: false %>
+				<% end %>
+				<% if tweet.disproved == false %>
+					<%= f.submit "X", class: "btn btn-xs btn-default btn-success-hover pull-right", title: "Disprove" %>
+				<% else %>
+					<%= f.submit "X", class: "btn btn-xs btn-default btn-danger-hover pull-right", title: "X Disproved" %>
 				<% end %>
 			<% end %>
 		</div>

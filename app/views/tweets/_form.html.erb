@@ -1,7 +1,7 @@
 <%= form_for [@organization, @bucket, @resource, @tweet] do |f| %>
 	<div class="row">
 		<div class="col-md-12">
-			<%= f.collection_select :contributor_id, @organization.contributors, :id, :name, {prompt: "Select a contributor"}, {class: "form-control"} %>
+			<%= f.collection_select :contributor_id, @organization.contributors, :id, :name, {prompt: "Select a contributor"}, {class: "form-control", required: true} %>
 		</div>
 	</div>
 	<div class="row">
@@ -9,14 +9,15 @@
 			<%= f.text_area :copy, placeholder: "Body of tweet...", autocomplete: :off, style: "width:100%;", rows: 2, required: true, maxlength: "118" %>
 		</div>
 	</div>
-	<ol>
-	<li class="hashtag"> #Hello</li>
-	<li class="hashtag"> #World</li>
-	<li class="hashtag"> #Earthlings</li>
-	</ol>
+	<ul class="list-inline" style="padding-left:10px;">
+		Tags:
+		<% @organization.tag_list.split(",").each do |tag| %>
+			<li class="hashtag pointer btn btn-sm btn-default"> #<%= tag.strip %></li>
+		<% end %>
+	</ul>
 	<div class="row">
 		<div class="col-md-12">
-			<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default" %>
+			<%= f.submit "Create", data: { disable_with: "Submitting..." }, class: "btn btn-default btn-primary" %>
 		</div>
 	</div>
 

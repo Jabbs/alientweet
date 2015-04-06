@@ -24,12 +24,15 @@ class TweetsController < ApplicationController
         redirect_to organization_all_resources_path(@organization)
       elsif referrer == "approved_resources"
         redirect_to organization_approved_resources_path(@organization)
+      elsif referrer == "tweet_manager"
+        redirect_to organization_tweet_manager_path(@organization)
       elsif referrer == "resources"
         redirect_to organization_bucket_resources_path(@organization, @tweet.resource.bucket)
       else
         redirect_to [@organization, @tweet.resource.bucket, @tweet.resource]
       end
     else
+      logger.debug "TWEET ERRORS: #{@tweet.errors.full_messages}"
       redirect_to root_path, alert: "An error occurred."
     end
   end
@@ -62,6 +65,7 @@ class TweetsController < ApplicationController
     end
     
     def tweet_params
-      params.require(:tweet).permit(:link, :copy, :approved, :resource_id, :sent, :last_approved_at, :last_sent_at, :contributor_id)
+      params.require(:tweet).permit(:link, :copy, :approved, :resource_id, :sent, :last_approved_at, :last_sent_at, :contributor_id, 
+                                    :disproved, :last_disproved_at)
     end
 end

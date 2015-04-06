@@ -89,7 +89,7 @@ $body_grey: #4a4a4a;
 .red-background { background: $red; }
 .green-background { background: $green_dark; }
 .orange-background { background: $orange; }
-.grey-background { background: $grey_dark; }
+
 .blue-hr {
   border-top: 1px solid $blue;
   border-bottom: 1px solid $blue;
@@ -183,6 +183,10 @@ p { margin-bottom: 20px; font-weight: normal;}
   filter:alpha(opacity=40); /* For IE8 and earlier */
 }
 
+.datepicker {
+	z-index: 2000;
+}
+
 .tweet {
 	padding:5px 10px;
 	margin-bottom:10px;
@@ -211,6 +215,7 @@ p { margin-bottom: 20px; font-weight: normal;}
 .tweet.sent {
 	background: $green;
 }
+.tweet.grey-background { background: darken($grey, 10%); }
 
 #organizations {
 	padding:10px;

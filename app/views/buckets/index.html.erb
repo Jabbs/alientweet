@@ -66,6 +66,15 @@
 				<hr class="blue-hr">
 				<div class="row">
 					<div class="col-md-4">
+						<h4 class="center">Disproved Tweets</h4>
+						<% @disproved_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_disproved_at %>
+						<% end %>
+						<% if @disproved_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
+						<% end %>
+					</div>
+					<div class="col-md-4">
 						<h4 class="center">Tweets Created</h4>
 						<% @unapproved_tweets.each do |tweet| %>
 							<%= render "tweets/tweet", tweet: tweet, date: tweet.created_at %>
@@ -83,15 +92,7 @@
 							<h4 class="center top-margin"><em>None</em></h4>
 						<% end %>
 					</div>
-					<div class="col-md-4">
-						<h4 class="center">Tweets Sent</h4>
-						<% @sent_tweets.each do |tweet| %>
-							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_sent_at %>
-						<% end %>
-						<% if @sent_tweets.size == 0 %>
-							<h4 class="center top-margin"><em>None</em></h4>
-						<% end %>
-					</div>
+
 				</div>
 				
 			</div>

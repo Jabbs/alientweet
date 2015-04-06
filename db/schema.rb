@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406162149) do
+ActiveRecord::Schema.define(version: 20150406200004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,10 +74,11 @@ ActiveRecord::Schema.define(version: 20150406162149) do
   add_index "hashtaggings", ["resource_id"], name: "index_hashtaggings_on_resource_id", using: :btree
 
   create_table "organizations", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.text     "tag_list",   default: ""
   end
 
   create_table "readings", force: true do |t|
@@ -120,17 +121,33 @@ ActiveRecord::Schema.define(version: 20150406162149) do
 
   add_index "summarizations", ["resource_id"], name: "index_summarizations_on_resource_id", using: :btree
 
+  create_table "timesheets", force: true do |t|
+    t.integer  "organization_id"
+    t.date     "day_start"
+    t.date     "day_end"
+    t.integer  "tweets_per_day"
+    t.time     "time_slot1"
+    t.time     "time_slot2"
+    t.time     "time_slot3"
+    t.time     "time_slot4"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tweets", force: true do |t|
     t.integer  "resource_id"
     t.string   "copy"
     t.string   "link"
-    t.boolean  "approved",         default: false
-    t.boolean  "sent",             default: false
+    t.boolean  "approved",          default: false
+    t.boolean  "sent",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_approved_at"
     t.datetime "last_sent_at"
     t.integer  "contributor_id"
+    t.boolean  "disproved",         default: false
+    t.datetime "last_disproved_at"
+    t.integer  "timesheet_id"
   end
 
   add_index "tweets", ["resource_id"], name: "index_tweets_on_resource_id", using: :btree
