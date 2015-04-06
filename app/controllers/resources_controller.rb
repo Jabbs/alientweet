@@ -28,6 +28,10 @@ class ResourcesController < ApplicationController
       logger.debug "REFERRER: #{referrer}"
       if referrer == "all_resources"
         redirect_to organization_all_resources_path(@organization)
+      elsif referrer == "unread_resources"
+        redirect_to organization_unread_resources_path(@organization)
+      elsif referrer == "approved_resources"
+        redirect_to organization_approved_resources_path(@organization)
       else
         redirect_to [@organization, @resource.bucket, @resource]
       end

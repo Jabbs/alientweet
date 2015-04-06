@@ -34,6 +34,13 @@
 	<% end %>
 	<div class="row">
 		<div class="col-md-12">
+			<small class="tweet-url">
+				<%= text_field_tag("Tweet url", tweet.resource.url, style: "width:100%;") %>
+			</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 			<small class="tweet-copy">
 				<%= text_area_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;", rows: 3) %>
 			</small>
@@ -44,6 +51,10 @@
 			<% if tweet.contributor %>
 				<small>by <%= tweet.contributor.name %></small>
 			<% end %>
+			<% tweet.comments.any? ? darken = "" : darken = "-o" %>
+			<a class="grey-link-dark" data-toggle="modal" data-target="#commentModalTweet<%= tweet.id %>" href="#" role="button"><i class="fa fa-comment<%= darken %>" title='comments'></i></a>
+			<%= render "comments/comments_tweet_modal", tweet: tweet %>
+			
 			<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
 			<%= render "tweets/edit_tweet_modal", tweet: tweet %>
 			
@@ -51,23 +62,7 @@
 			  <i class='fa fa-trash' title='remove tweet'></i>
 			<% end %>
 		</div>
-		<div class="col-md-3 col-md-offset-1">
-			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
-				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
-				<% if tweet.approved == false %>
-					<%= f.hidden_field :approved, value: true %>
-					<%= f.hidden_field :last_approved_at, value: DateTime.now %>
-				<% else %>
-					<%= f.hidden_field :approved, value: false %>
-				<% end %>
-				<% if tweet.approved == false %>
-					<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
-				<% else %>
-					<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
-				<% end %>
-			<% end %>
-		</div>
-		<div class="col-md-3">
+		<div class="col-md-7">
 			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
 				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
 				<% if tweet.sent == false %>
@@ -80,6 +75,20 @@
 					<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
 				<% else %>
 					<%= f.submit "✓ Sent", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
+				<% end %>
+			<% end %>
+			<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
+				<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+				<% if tweet.approved == false %>
+					<%= f.hidden_field :approved, value: true %>
+					<%= f.hidden_field :last_approved_at, value: DateTime.now %>
+				<% else %>
+					<%= f.hidden_field :approved, value: false %>
+				<% end %>
+				<% if tweet.approved == false %>
+					<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
+				<% else %>
+					<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
 				<% end %>
 			<% end %>
 		</div>

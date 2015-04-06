@@ -9,8 +9,11 @@ Rails.application.routes.draw do
     resources :contributors
     resources :buckets do
       resources :resources do
+        resources :comments, only: [:create]
         resources :readings, only: [:create, :destroy]
-        resources :tweets
+        resources :tweets do
+          resources :comments, only: [:create]
+        end
       end
     end
   end

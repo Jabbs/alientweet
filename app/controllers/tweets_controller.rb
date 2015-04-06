@@ -18,8 +18,12 @@ class TweetsController < ApplicationController
       logger.debug "REFERRER: #{referrer}"
       if referrer == "buckets"
         redirect_to organization_buckets_path(@organization)
+      elsif referrer == "unread_resources"
+        redirect_to organization_unread_resources_path(@organization)
       elsif referrer == "all_resources"
         redirect_to organization_all_resources_path(@organization)
+      elsif referrer == "approved_resources"
+        redirect_to organization_approved_resources_path(@organization)
       elsif referrer == "resources"
         redirect_to organization_bucket_resources_path(@organization, @tweet.resource.bucket)
       else
