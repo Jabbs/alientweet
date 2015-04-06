@@ -50,6 +50,9 @@
 							| by <%= @resource.contributor.name %>
 						<% end %>
 						| <%= pluralize(@resource.tweets.count, "tweet") %>
+						|
+						<a data-toggle="modal" data-target="#commentModalResource<%= @resource.id %>" href="#" role="button"> <%= pluralize(@resource.comments.count, "comment") %></a>
+						<%= render "comments/comments_resource_modal", resource: @resource %>
 					</div>
 				</div>
 				

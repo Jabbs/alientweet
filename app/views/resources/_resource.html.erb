@@ -23,6 +23,9 @@
 			<div class="row small-bottom-margin">
 				<div class="col-md-12">
 					<small>
+						<% resource.comments.any? ? darken_r = "" : darken_r = "-o" %>
+						<a class="grey-link-dark" data-toggle="modal" data-target="#commentModalResource<%= resource.id %>" href="#" role="button"><i class="fa fa-comment<%= darken_r %>" title='comments'></i></a>
+						<%= render "comments/comments_resource_modal", resource: resource %>
 						Bucket: <%= link_to resource.bucket.name, organization_bucket_resources_path(@organization, resource.bucket) %>
 						|
 						Added: <%= resource.created_at.strftime('%-m/%d/%y %-l:%M%P') %>

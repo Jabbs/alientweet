@@ -1,4 +1,4 @@
-<div class="modal" id="commentModalTweet<%= tweet.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal" id="commentModalResource<%= resource.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
     <div class="modal-content">
 			<div class="modal-header">
@@ -6,7 +6,7 @@
 				Comments:
 			</div>
 			<div class="modal-body">
-				<% tweet.comments.each do |comment| %>
+				<% resource.comments.each do |comment| %>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="well" style="border-color:black; padding: 3px 8px;">
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 				<% end %>
-				<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet, @comment] do |f| %>
+				<%= form_for [resource.bucket.organization, resource.bucket, resource, @comment] do |f| %>
 					<div class="row small-bottom-margin">
 						<div class="col-md-12">
 							<%= f.collection_select :contributor_id, @organization.contributors, :id, :name, {prompt: "Select a contributor"}, {class: "form-control", required: true} %>
@@ -50,8 +50,8 @@
 							<%= f.text_area :body, placeholder: "Body...", autocomplete: :off, style: "width:100%;", rows: 2, required: true %>
 						</div>
 					</div>
-					<%= f.hidden_field :commentable_type, value: "Tweet"%>
-					<%= f.hidden_field :commentable_id, value: tweet.id %>
+					<%= f.hidden_field :commentable_type, value: "Resource"%>
+					<%= f.hidden_field :commentable_id, value: resource.id %>
 					<div class="row">
 						<div class="col-md-12"><%= f.submit "Submit", class: "btn btn-default" %></div>
 					</div>
