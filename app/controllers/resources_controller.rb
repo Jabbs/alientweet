@@ -1,5 +1,6 @@
 class ResourcesController < ApplicationController
   before_filter :instantiate_stuff
+  before_filter :correct_user
   
   def index
     @resource = Resource.new(bucket_id: @bucket.id)
@@ -55,6 +56,10 @@ class ResourcesController < ApplicationController
   end
   
   private
+  
+    def correct_user
+      redirect_to new_user_session_path unless current_user == @organization.user
+    end
   
     def fix_date_month_order
       params[:resource][:article_date] = Date.strptime(params[:resource][:article_date],'%m/%d/%Y') if params[:resource][:article_date].present?

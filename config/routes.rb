@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :organizations do
     get "all_resources"
     get "archived_resources"

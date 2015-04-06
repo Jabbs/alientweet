@@ -1,6 +1,26 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = false
+  
+  # Send out mailers when .delivery is invoked
+  config.action_mailer.perform_deliveries = true
+  
+  # Gmail mailer configuration
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'alientext.herokuapp.com',
+    :user_name            => ENV['GMAIL_USERNAME'],
+    :password             => ENV['GMAIL_PASSWORD'],
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+    
+  # Set the default host option for mailer
+  config.action_mailer.default_url_options = { :host => 'alientext.herokuapp.com' }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
