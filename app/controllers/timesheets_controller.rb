@@ -10,12 +10,20 @@ class TimesheetsController < ApplicationController
   end
   
   def create
+    @approved_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(sent: false).where(timesheet_id: nil)
     fix_date_month_order
     @timesheet = Timesheet.new(timesheet_params)
-    if @timesheet.save
-      redirect_to organization_timesheets_path(@organization), notice: "Timesheet created."
+    days = (@timesheet.day_end - @timesheet.day_start).to_i + 1
+    number_of_tweets_needed = days * @timesheet.tweets_per_day
+    logger.debug "NUMBER OF TWEETS NEEDED: #{number_of_tweets_needed}"
+    if number_of_tweets_needed > @approved_tweets.size
+      redirect_to organization_timesheets_path(@organization), alert: "Unable to create this timesheet. You need #{number_of_tweets_needed} staged tweets to populate this timesheet."
     else
-      redirect_to root_path, alert: "The application encountered an error."
+      if @timesheet.save
+        redirect_to organization_timesheets_path(@organization), notice: "Timesheet created."
+      else
+        redirect_to root_path, alert: "The application encountered an error."
+      end
     end
   end
   

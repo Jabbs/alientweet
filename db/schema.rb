@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406200004) do
+ActiveRecord::Schema.define(version: 20150407160133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20150406200004) do
     t.boolean  "disproved",         default: false
     t.datetime "last_disproved_at"
     t.integer  "timesheet_id"
+    t.datetime "timesheet_send_at"
   end
 
   add_index "tweets", ["resource_id"], name: "index_tweets_on_resource_id", using: :btree
