@@ -13,11 +13,12 @@ class Resource < ActiveRecord::Base
   
   def previous
     bucket_id = self.bucket.id
-    Resource.where(bucket_id: bucket_id).limit(1).order("id DESC").where("id < ?", id).first
+    Resource.where(bucket_id: bucket_id).where(archived: false).limit(1).order("id DESC").where("id < ?", id).first
   end
 
   def next
-    Resource.where(bucket_id: bucket_id).limit(1).order("id ASC").where("id > ?", id).first
+    bucket_id = self.bucket.id
+    Resource.where(bucket_id: bucket_id).where(archived: false).limit(1).order("id ASC").where("id > ?", id).first
   end
   
   def has_been_read

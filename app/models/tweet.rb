@@ -3,7 +3,7 @@ class Tweet < ActiveRecord::Base
   belongs_to :contributor
   has_many :comments, as: :commentable, dependent: :destroy
   
-  validates :copy, presence: true, length: {minimum: 5, maximum: 118}
+  validates :copy, presence: true, length: {minimum: 5, maximum: 116}
   
   def check_approved_and_add_placement
     if self.approved? && !self.sent?
