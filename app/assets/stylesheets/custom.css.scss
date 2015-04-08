@@ -213,7 +213,7 @@ p { margin-bottom: 20px; font-weight: normal;}
 	background: $blue_light;
 }
 .tweet.sent {
-	background: $green;
+	background: lighten($green, 20%);
 }
 .tweet.grey-background { background: darken($grey, 10%); }
 

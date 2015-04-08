@@ -65,7 +65,7 @@
 		</div>
 		<div class="col-md-7">
 			<% if tweet.sent? %>
-				<%= f.submit "✓ SENT", class: "btn btn-xs btn-default pull-right disabled" %>
+				<%= submit_tag "✓ SENT", class: "btn btn-xs btn-default pull-right disabled" %>
 			<% else %>
 				<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
 					<%= f.hidden_field :resource_id, value: tweet.resource.id %>
