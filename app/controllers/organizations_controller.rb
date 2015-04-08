@@ -12,22 +12,22 @@ class OrganizationsController < ApplicationController
   
   def unread_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources.where(read: false).order("created_at DESC")
+    @resources = @organization.resources.where(read: false).order("created_at DESC").paginate(page: params[:page], per_page:20)
   end
   
   def all_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources.where(archived: false).order("created_at DESC")
+    @resources = @organization.resources.where(archived: false).order("created_at DESC").paginate(page: params[:page], per_page:20)
   end
   
   def archived_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources.where(archived: true).order("created_at DESC")
+    @resources = @organization.resources.where(archived: true).order("created_at DESC").paginate(page: params[:page], per_page:20)
   end
   
   def approved_resources
     @organization = Organization.find(params[:organization_id])
-    @resources = @organization.resources.where(approved: true).order("created_at DESC")
+    @resources = @organization.resources.where(approved: true).order("created_at DESC").paginate(page: params[:page], per_page:20)
   end
   
   def tweet_manager
@@ -37,7 +37,7 @@ class OrganizationsController < ApplicationController
   
   def sent_tweets
     @organization = Organization.find(params[:organization_id])
-    @sent_tweets = @organization.tweets.where(sent: true).order("created_at ASC").paginate(page: params[:page], per_page:20)
+    @sent_tweets = @organization.tweets.where(sent: true).order("created_at DESC").paginate(page: params[:page], per_page:20)
   end
   
   def clear_all_tweets
