@@ -40,6 +40,12 @@
 				<div class="col-md-12">
 					<%= render "resources/approve_form", resource: resource, btn_size: "btn-xs", placement: "" %>
 					<%= render "resources/archive_form", resource: resource, btn_size: "btn-xs", placement: "" %>
+					<% if resource.readers.any? %>
+						| Read by:
+						<% resource.readers.each do |reader| %>
+							<%= resource.readers.pluck(:name).to_sentence %>
+						<% end %>
+					<% end %>
 				</div>
 			</div>
 
