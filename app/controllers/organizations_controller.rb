@@ -37,7 +37,7 @@ class OrganizationsController < ApplicationController
   
   def sent_tweets
     @organization = Organization.find(params[:organization_id])
-    @sent_tweets = @organization.tweets.where(sent: true).order("created_at ASC")
+    @sent_tweets = @organization.tweets.where(sent: true).order("created_at ASC").paginate(page: params[:page], per_page:20)
   end
   
   def clear_all_tweets

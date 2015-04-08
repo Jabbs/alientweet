@@ -7,9 +7,9 @@ class BucketsController < ApplicationController
     @contributor = Contributor.new(organization_id: @organization.id)
     @contributors = @organization.contributors.order("name ASC")
     @tweets = @organization.tweets
-    @disproved_tweets = @tweets.where(disproved: true)
-    @unapproved_tweets = @tweets.where(disproved: false).where(approved: false).where(sent: false)
-    @approved_tweets = @tweets.where(disproved: false).where(approved: true).where(sent: false)
+    @disproved_tweets = @tweets.where(disproved: true).order("last_approved_at DESC").limit(20)
+    @unapproved_tweets = @tweets.where(disproved: false).where(approved: false).where(sent: false).order("created_at DESC").limit(20)
+    @approved_tweets = @tweets.where(disproved: false).where(approved: true).where(sent: false).order("last_approved_at DESC").limit(20)
   end
   
   def show
