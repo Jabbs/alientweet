@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407160133) do
+ActiveRecord::Schema.define(version: 20150408162412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,19 +121,6 @@ ActiveRecord::Schema.define(version: 20150407160133) do
 
   add_index "summarizations", ["resource_id"], name: "index_summarizations_on_resource_id", using: :btree
 
-  create_table "timesheets", force: true do |t|
-    t.integer  "organization_id"
-    t.date     "day_start"
-    t.date     "day_end"
-    t.integer  "tweets_per_day"
-    t.time     "time_slot1"
-    t.time     "time_slot2"
-    t.time     "time_slot3"
-    t.time     "time_slot4"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "tweets", force: true do |t|
     t.integer  "resource_id"
     t.string   "copy"
@@ -147,8 +134,8 @@ ActiveRecord::Schema.define(version: 20150407160133) do
     t.integer  "contributor_id"
     t.boolean  "disproved",         default: false
     t.datetime "last_disproved_at"
-    t.integer  "timesheet_id"
-    t.datetime "timesheet_send_at"
+    t.integer  "placement_id"
+    t.boolean  "cleared",           default: false
   end
 
   add_index "tweets", ["resource_id"], name: "index_tweets_on_resource_id", using: :btree

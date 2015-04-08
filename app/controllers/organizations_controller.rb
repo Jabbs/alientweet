@@ -30,6 +30,22 @@ class OrganizationsController < ApplicationController
     @resources = @organization.resources.where(approved: true).order("created_at DESC")
   end
   
+  def tweet_manager
+    @organization = Organization.find(params[:organization_id])
+    @approved_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(cleared: false).order("placement_id ASC")
+  end
+  
+  def sent_tweets
+    @organization = Organization.find(params[:organization_id])
+    @sent_tweets = @organization.tweets.where(sent: true).order("created_at ASC")
+  end
+  
+  def clear_all_tweets
+    @organization = Organization.find(params[:organization_id])
+    @organization.clear_all_tweets
+    redirect_to organization_tweet_manager_path(@organization)
+  end
+  
   def create
     @organization = Organization.new(organization_params)
     if @organization.save

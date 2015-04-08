@@ -11,9 +11,20 @@ class TweetsController < ApplicationController
     end
   end
   
+  def move
+    @tweet = Tweet.find(params[:tweet_id])
+    if params[:up]
+      @tweet.move_up
+    elsif params[:down]
+      @tweet.move_down
+    end
+    redirect_to organization_tweet_manager_path(@organization)
+  end
+  
   def update
     @tweet = Tweet.find(params[:id])
     if @tweet.update_attributes(tweet_params)
+      @tweet.check_approved_and_add_placement
       referrer = request.referer.split('/').last
       logger.debug "REFERRER: #{referrer}"
       if referrer == "buckets"

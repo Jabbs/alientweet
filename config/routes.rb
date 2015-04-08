@@ -6,13 +6,16 @@ Rails.application.routes.draw do
     get "archived_resources"
     get "approved_resources"
     get "unread_resources"
-    resources :timesheets
+    get "tweet_manager"
+    get "sent_tweets"
+    put "clear_all_tweets"
     resources :contributors
     resources :buckets do
       resources :resources do
         resources :comments, only: [:create]
         resources :readings, only: [:create, :destroy]
         resources :tweets do
+          put 'move'
           resources :comments, only: [:create]
         end
       end

@@ -1,0 +1,33 @@
+<div class="container" style="margin-bottom:600px;">
+	<div class="row">
+		<div class="col-md-12">
+			<%= link_to "Organizations", root_path %>
+			/
+			<%= link_to @organization.name, organization_buckets_path(@organization) %>
+			<div class="pull-right">
+				Resources:
+				<%= render "shared/resource_links" %>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well">
+				<div class="row small-bottom-margin">
+					<div class="col-md-12">
+						<strong>Sent Tweets</strong>
+					</div>
+				</div>
+				<% if @sent_tweets.any? %>
+					<% @sent_tweets.each do |tweet| %>
+						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: "" %>
+					<% end %>
+				<% else %>
+					<h4 class="center top-margin"><em>None</em></h4>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+				
