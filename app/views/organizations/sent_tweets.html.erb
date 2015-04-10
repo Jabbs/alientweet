@@ -21,7 +21,7 @@
 				</div>
 				<% if @sent_tweets.any? %>
 					<% @sent_tweets.each do |tweet| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: "" %>
+						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: "", day: "" %>
 					<% end %>
 				<% else %>
 					<h4 class="center top-margin"><em>None</em></h4>

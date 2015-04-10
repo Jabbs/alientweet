@@ -1,34 +1,40 @@
-<div class="row">
-	<div class="col-md-1">
-		<% unless tweet.sent? %>
-			<small>
-				<%= link_to organization_bucket_resource_tweet_move_path(@organization, tweet.resource.bucket, tweet.resource, tweet, up: true), method: :put, class: "grey-link-dark" do %>
-					<i class="fa fa-arrow-up" title="move up"></i>
-				<% end %>
-				<%= link_to organization_bucket_resource_tweet_move_path(@organization, tweet.resource.bucket, tweet.resource, tweet, down: true), method: :put, class: "grey-link-dark" do %>
-					<i class="fa fa-arrow-down" title="move down"></i>
-				<% end %>
+<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, html: {class: "sending-form"} do |f| %>
+	<div class="row">
+		<div class="col-md-1">
+			<% unless tweet.sent? %>
+				<small>
+					<%= link_to organization_bucket_resource_tweet_move_path(@organization, tweet.resource.bucket, tweet.resource, tweet, up: true), method: :put, class: "grey-link-dark" do %>
+						<i class="fa fa-arrow-up" title="move up"></i>
+					<% end %>
+					<%= link_to organization_bucket_resource_tweet_move_path(@organization, tweet.resource.bucket, tweet.resource, tweet, down: true), method: :put, class: "grey-link-dark" do %>
+						<i class="fa fa-arrow-down" title="move down"></i>
+					<% end %>
+				</small>
+			<% end %>
+			<span class="tweet_resource_tag">
+				<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
+			</span>
+		</div>
+		<div class="col-md-5">
+			<small class="tweet-url">
+				<%= text_field_tag("Tweet url", tweet.resource.url, style: "width:100%;") %>
 			</small>
-		<% end %>
-		<span class="tweet_resource_tag">
-			<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
-		</span>
-	</div>
-	<div class="col-md-1">
-		<div class="pull-right"><%= timeslot %></div>
-	</div>
-	<div class="col-md-4">
-		<small class="tweet-copy">
-			<%= text_area_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;") %>
-		</small>
-	</div>
-	<div class="col-md-5">
-		<small class="tweet-url">
-			<%= text_field_tag("Tweet url", tweet.resource.url, style: "width:100%;") %>
-		</small>
-	</div>
-	<div class="col-md-1">
-		<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put do |f| %>
+			<small class="tweet-copy">
+				<%= text_area_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;") %>
+			</small>
+		</div>
+		<div class="col-md-4">
+			<% unless tweet.scheduled_to_send_at %>
+				<% if day.present? && timeslot.present? %>
+					<% datetime = (day + timeslot).to_datetime + 7.days %>
+				<% else %>
+					<% datetime = nil %>
+				<% end %>
+				<%= f.datetime_select :scheduled_to_send_at, {default: datetime, minute_step: 5, :order => [:hour, :minute, :day, :month, :year]}, {class: "inline"} %>
+			<% end %>
+		</div>
+		<div class="col-md-2">
+	
 			<%= f.hidden_field :resource_id, value: tweet.resource.id %>
 			<% if tweet.sent == false %>
 				<%= f.hidden_field :sent, value: true %>
@@ -39,9 +45,9 @@
 			<% if tweet.sent == false %>
 				<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
 			<% else %>
-				<%= f.submit "✓ Sent", class: "btn btn-xs btn-default btn-danger-hover pull-right", disabled: true %>
+				<%= f.submit "✓ #{tweet.scheduled_to_send_at.strftime("%b %-d %-l:%M%P")}", class: "btn btn-xs btn-default btn-danger-hover pull-right", disabled: true %>
 			<% end %>
-		<% end %>
-
+	
+		</div>
 	</div>
-</div>
+<% end %>

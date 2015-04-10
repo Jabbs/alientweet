@@ -17,8 +17,10 @@
 				<div class="row">
 					<div class="col-md-12">
 						<%= link_to "Clear Sent Tweets", organization_clear_all_tweets_path(@organization), method: :put, class: "btn btn-default pull-right" %>
+						<%= link_to "<i class='fa fa-download'></i> CSV".html_safe, organization_tweet_manager_path(@organization, format: "csv"), class: "btn btn-default" %>
 					</div>
 				</div>
+				<hr class="blue-hr">
 				<% timeslots = ["7:00am", "11:00am", "3:00pm"] %>
 				<% unless @approved_tweets == [] || @approved_tweets[0..2] == nil %>
 					<div class="row small-bottom-margin">
@@ -27,29 +29,29 @@
 						</div>
 					</div>
 					<% @approved_tweets[0..2].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index] %>
+						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Monday" %>
 					<% end %>
 					<hr class="blue-hr">
 				<% end %>
 				<% unless @approved_tweets[3..5] == nil %>
 					<div class="row small-bottom-margin">
 						<div class="col-md-12">
-							<strong>Tuesday</strong>
+							<strong>Wednesday</strong>
 						</div>
 					</div>
 					<% @approved_tweets[3..5].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index] %>
+						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Wednesday" %>
 					<% end %>
 					<hr class="blue-hr">
 				<% end %>
 				<% unless @approved_tweets[6..8] == nil %>
 					<div class="row small-bottom-margin">
 						<div class="col-md-12">
-							<strong>Wednesday</strong>
+							<strong>Thursday</strong>
 						</div>
 					</div>
 					<% @approved_tweets[6..8].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index] %>
+						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Thursday" %>
 					<% end %>
 					<hr class="blue-hr">
 				<% end %>
@@ -60,7 +62,7 @@
 						</div>
 					</div>
 					<% @approved_tweets[9..11].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index] %>
+						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Friday" %>
 					<% end %>
 					<hr class="blue-hr">
 				<% end %>

@@ -10,30 +10,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render 'layouts/header' %>
 <%= render 'shared/flash', flash: flash %>
-<div class="container">
-	<div class="row">
-		<div class="col-md-9">
-			<h1 class="green" style="margin-top:10px;">
-				<%= link_to "AlienText + Twitter", root_path %>
-
-			</h1>
-		</div>
-		<div class="col-md-3">
-			<div class="pull-right">
-				<% if current_user %>
-					<%= current_user.email %>
-					<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-				<% else %>
-					<%= link_to "Sign In", new_user_session_path %>
-				<% end %>
-			</div>
-			<h1><small><a data-toggle="modal" data-target="#helpModal" href="#" class="pull-right"><i class='fa fa-question-circle' title='Help'></i></a></small></h1>
-			<%= render 'shared/help_modal' %>
-
-		</div>
-	</div>
-</div>
 <%= yield %>
 
 </body>

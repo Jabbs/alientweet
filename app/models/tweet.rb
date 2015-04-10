@@ -28,4 +28,16 @@ class Tweet < ActiveRecord::Base
     self.placement_id += 1
     self.save!
   end
+  
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      all.each do |tweet|
+        row = []
+        row << tweet.scheduled_to_send_at.strftime("%-m/%-d/%y %-l:%M")
+        row << tweet.copy
+        row << tweet.resource.url
+        csv << row
+      end
+    end
+  end
 end
