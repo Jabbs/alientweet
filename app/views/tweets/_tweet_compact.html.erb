@@ -1,16 +1,6 @@
 <%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, html: {class: "sending-form"} do |f| %>
 	<div class="row">
 		<div class="col-md-1">
-			<% unless tweet.sent? %>
-				<small>
-					<%= link_to organization_bucket_resource_tweet_move_path(@organization, tweet.resource.bucket, tweet.resource, tweet, up: true), method: :put, class: "grey-link-dark" do %>
-						<i class="fa fa-arrow-up" title="move up"></i>
-					<% end %>
-					<%= link_to organization_bucket_resource_tweet_move_path(@organization, tweet.resource.bucket, tweet.resource, tweet, down: true), method: :put, class: "grey-link-dark" do %>
-						<i class="fa fa-arrow-down" title="move down"></i>
-					<% end %>
-				</small>
-			<% end %>
 			<span class="tweet_resource_tag">
 				<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
 			</span>
@@ -27,6 +17,7 @@
 			<% unless tweet.scheduled_to_send_at %>
 				<% if day.present? && timeslot.present? %>
 					<% datetime = (day + timeslot).to_datetime + 7.days %>
+					<% datetime = nil %>
 				<% else %>
 					<% datetime = nil %>
 				<% end %>

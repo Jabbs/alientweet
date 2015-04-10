@@ -32,10 +32,12 @@ class OrganizationsController < ApplicationController
   
   def tweet_manager
     @organization = Organization.find(params[:organization_id])
-    @approved_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(cleared: false).order("placement_id ASC")
+    @approved_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(cleared: false).where(sent: false)
+    # @approved_tweets = @approved_tweets.joins(:resource).order('resources.id')
+    @to_send_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(cleared: false).where(sent: true).order("scheduled_to_send_at ASC")
     respond_to do |format|
       format.html
-      format.csv { send_data @approved_tweets.where(sent: true).to_csv }
+      format.csv { send_data @to_send_tweets.to_csv }
     end
   end
   
