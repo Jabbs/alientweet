@@ -1,3 +1,4 @@
+<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, html: {class: "sending-form"} do |f| %>
 <div class="row">
 	<div class="col-md-1">
 		<span class="tweet_resource_tag">
@@ -5,26 +6,31 @@
 		</span>
 	</div>
 	<div class="col-md-4">
-		<small class="tweet-url">
-			<%= text_field_tag("Tweet url", tweet.resource.url, style: "width:100%;", title: tweet.resource.url) %>
-		</small>
-	</div>
-	<div class="col-md-4">
 		<small class="tweet-copy-sm">
 			<%= text_field_tag("Tweet copy", tweet.copy, style: "width:100%; resize: none;", title: tweet.copy) %>
 		</small>
 	</div>
-	<div class="col-md-1">
-		<%= tweet.scheduled_to_send_at.strftime("%A") %>
+	<div class="col-md-3">
+		<small class="tweet-url">
+			<%= text_field_tag("Tweet url", tweet.resource.url, style: "width:100%;", title: tweet.resource.url) %>
+		</small>
 	</div>
-	<div class="col-md-1">
+	<div class="col-md-2">
 		<div class="pull-right">
+			<%= tweet.scheduled_to_send_at.strftime("%A") %>,
 			<%= tweet.scheduled_to_send_at.strftime("%b %-d ") %>
 		</div>
 	</div>
-	<div class="col-md-1">
-		<div class="pull-right">
+	<div class="col-md-2">
+		<span class="pull-right">
+			<%= f.hidden_field :resource_id, value: tweet.resource.id %>
+			<%= f.hidden_field :sent, value: false %>
+			<%= f.submit "X", class: "btn btn-xs btn-default", style: "margin-left: 5px;", title: "Unsend" %>
+		</span>
+		
+		<span class="pull-right">
 			<%= tweet.scheduled_to_send_at.strftime("%-l:%M%P") %>
-		</div>
+		</span>
 	</div>
 </div>
+<% end %>
