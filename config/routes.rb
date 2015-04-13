@@ -7,8 +7,10 @@ Rails.application.routes.draw do
     get "approved_resources"
     get "unread_resources"
     get "tweet_manager"
+    get "tweets_to_send"
     get "sent_tweets"
     put "clear_all_tweets"
+    resources :activities
     resources :contributors
     resources :buckets do
       resources :resources do

@@ -7,9 +7,7 @@ class BucketsController < ApplicationController
     @contributor = Contributor.new(organization_id: @organization.id)
     @contributors = @organization.contributors.order("name ASC")
     @tweets = @organization.tweets
-    @disproved_tweets = @tweets.where(disproved: true).order("last_approved_at DESC").limit(20)
-    @unapproved_tweets = @tweets.where(disproved: false).where(approved: false).where(sent: false).order("created_at DESC").limit(20)
-    @approved_tweets = @tweets.where(disproved: false).where(approved: true).where(sent: false).order("last_approved_at DESC").limit(20)
+    @activities = @organization.activities.order("created_at desc")
   end
   
   def show
@@ -19,6 +17,7 @@ class BucketsController < ApplicationController
   def create
     @bucket = @organization.buckets.new(bucket_params)
     if @bucket.save
+      track_activity @bucket
       redirect_to organization_buckets_path(@organization), notice: "Bucket created."
     else
       redirect_to root_path, alert: "The application encountered an error."

@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def instantiate_new_comment
     @comment = Comment.new
   end
+  
+  def track_activity(trackable, action = params[:action])
+    @organization.activities.create! action: action, trackable: trackable
+  end
 end

@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = @resource.tweets.new(tweet_params)
     if @tweet.save
+      track_activity @tweet
       redirect_to [@organization, @bucket, @resource], notice: "Tweet created."
     else
       render "resources/show", alert: "Something went wrong with your tweet."
@@ -18,15 +19,15 @@ class TweetsController < ApplicationController
     elsif params[:down]
       @tweet.move_down
     end
-    redirect_to organization_tweet_manager_path(@organization)
+    redirect_to organization_tweets_to_send_path(@organization)
   end
   
   def update
     @tweet = Tweet.find(params[:id])
     if @tweet.update_attributes(tweet_params)
-      @tweet.check_approved_and_add_placement
+      # @tweet.check_approved_and_add_placement
       referrer = request.referer.split('/').last
-      logger.debug "REFERRER: #{referrer}"
+      # logger.debug "REFERRER: #{referrer}"
       if referrer == "buckets"
         redirect_to organization_buckets_path(@organization)
       elsif referrer == "unread_resources"
@@ -35,8 +36,8 @@ class TweetsController < ApplicationController
         redirect_to organization_all_resources_path(@organization)
       elsif referrer == "approved_resources"
         redirect_to organization_approved_resources_path(@organization)
-      elsif referrer == "tweet_manager"
-        redirect_to organization_tweet_manager_path(@organization)
+      elsif referrer == "tweets_to_send"
+        redirect_to organization_tweets_to_send_path(@organization)
       elsif referrer == "resources"
         redirect_to organization_bucket_resources_path(@organization, @tweet.resource.bucket)
       else

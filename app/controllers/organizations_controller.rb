@@ -32,6 +32,14 @@ class OrganizationsController < ApplicationController
   
   def tweet_manager
     @organization = Organization.find(params[:organization_id])
+    @tweets = @organization.tweets
+    @disproved_tweets = @tweets.where(disproved: true).order("last_approved_at DESC").limit(20)
+    @unapproved_tweets = @tweets.where(disproved: false).where(approved: false).where(sent: false).order("created_at DESC").limit(20)
+    @approved_tweets = @tweets.where(disproved: false).where(approved: true).where(sent: false).order("last_approved_at DESC").limit(20)
+  end
+  
+  def tweets_to_send
+    @organization = Organization.find(params[:organization_id])
     @approved_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(cleared: false).where(sent: false)
     # @approved_tweets = @approved_tweets.joins(:resource).order('resources.id')
     @to_send_tweets = @organization.tweets.where(disproved: false).where(approved: true).where(cleared: false).where(sent: true).order("scheduled_to_send_at ASC")
@@ -49,7 +57,7 @@ class OrganizationsController < ApplicationController
   def clear_all_tweets
     @organization = Organization.find(params[:organization_id])
     @organization.clear_all_tweets
-    redirect_to organization_tweet_manager_path(@organization)
+    redirect_to organization_tweets_to_send_path(@organization)
   end
   
   def create

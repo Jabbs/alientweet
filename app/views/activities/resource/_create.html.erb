@@ -1,0 +1,16 @@
+<div class="row small-bottom-margin">
+	<div class="col-md-10">
+		<% resource = activity.trackable %>
+		New resource
+		<span class="tweet_resource_tag">
+			<%= resource.id %>
+		</span>
+		<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>
+		added to bucket
+		<%= link_to "#{resource.bucket.name}", organization_bucket_resources_path(resource.bucket.organization, resource.bucket) %>
+		<% if resource.contributor.present? %>
+			by <%= resource.contributor.name %>
+		<% end %>
+	</div>
+	<div class="col-md-2"><small><div class="pull-right"><%= time_ago_in_words(resource.created_at) %> ago.</div></small></div>
+</div>

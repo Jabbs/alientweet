@@ -1,0 +1,16 @@
+<div class="row small-bottom-margin">
+	<div class="col-md-10">
+		<% tweet = activity.trackable %>
+		New tweet 
+		"<%= tweet.copy %>"
+		<% if tweet.contributor.present? %>
+			(added by <%= tweet.contributor.name %>)
+		<% end %>
+		to resource
+		<span class="tweet_resource_tag">
+			<%= tweet.resource.id %>
+		</span>
+		<%= link_to tweet.resource.extraction.title, [@organization, tweet.resource.bucket, tweet.resource] %>
+	</div>
+	<div class="col-md-2"><small><div class="pull-right"><%= time_ago_in_words(tweet.created_at) %> ago.</div></small></div>
+</div>

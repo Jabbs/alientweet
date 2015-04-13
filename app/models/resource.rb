@@ -8,6 +8,7 @@ class Resource < ActiveRecord::Base
   has_many :readings, as: :readable, dependent: :destroy
   has_many :readers, through: :readings, source: :contributor
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :activities, as: :trackable, dependent: :destroy
   
   validates :url, presence: true, uniqueness: {scope: :bucket}
   

@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
+      track_activity @comment
       referrer = request.referer.split('/')
       logger.debug "REFERRER: #{referrer}"
       if referrer.last(2).first == "resources"

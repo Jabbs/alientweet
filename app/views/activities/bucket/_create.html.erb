@@ -1,0 +1,9 @@
+<div class="row small-bottom-margin">
+	<div class="col-md-10">
+		<% bucket = activity.trackable %>
+		New bucket
+		<%= link_to "#{bucket.name}", organization_bucket_resources_path(bucket.organization, bucket) %>
+		created
+	</div>
+	<div class="col-md-2"><small><div class="pull-right"><%= time_ago_in_words(bucket.created_at) %> ago.</div></small></div>
+</div>

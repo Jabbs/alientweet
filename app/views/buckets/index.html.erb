@@ -64,37 +64,11 @@
 				</div>
 				
 				<hr class="blue-hr">
-				<div class="row">
-					<div class="col-md-4">
-						<h4 class="center">Disproved Tweets</h4>
-						<% @disproved_tweets.each do |tweet| %>
-							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_disproved_at %>
-						<% end %>
-						<% if @disproved_tweets.size == 0 %>
-							<h4 class="center top-margin"><em>None</em></h4>
-						<% end %>
-					</div>
-					<div class="col-md-4">
-						<h4 class="center">Tweets Created</h4>
-						<% @unapproved_tweets.each do |tweet| %>
-							<%= render "tweets/tweet", tweet: tweet, date: tweet.created_at %>
-						<% end %>
-						<% if @unapproved_tweets.size == 0 %>
-							<h4 class="center top-margin"><em>None</em></h4>
-						<% end %>
-					</div>
-					<div class="col-md-4">
-						<h4 class="center">Tweets Approved</h4>
-						<% @approved_tweets.each do |tweet| %>
-							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_approved_at %>
-						<% end %>
-						<% if @approved_tweets.size == 0 %>
-							<h4 class="center top-margin"><em>None</em></h4>
-						<% end %>
-					</div>
-
-				</div>
-				
+				<% if @activities.any? %>
+					<% @activities.each do |activity| %>
+						<%= render "activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity %>
+					<% end %>
+				<% end %>
 			</div>
 		</div>
 	</div>

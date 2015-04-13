@@ -2,6 +2,7 @@ class Tweet < ActiveRecord::Base
   belongs_to :resource
   belongs_to :contributor
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :activities, as: :trackable, dependent: :destroy
   
   validates :copy, presence: true, length: {minimum: 5, maximum: 116}
   

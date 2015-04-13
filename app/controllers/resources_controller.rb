@@ -47,6 +47,7 @@ class ResourcesController < ApplicationController
       Alien.create_extraction(@resource)
       Alien.create_summarization(@resource)
       Alien.create_hashtagging(@resource)
+      track_activity @resource
       redirect_to organization_bucket_resources_path(@organization, @bucket), notice: "Resource created."
     else
       redirect_to root_path, alert: "The application encountered an error."

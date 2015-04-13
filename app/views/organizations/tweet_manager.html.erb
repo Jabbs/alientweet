@@ -3,58 +3,54 @@
 		<div class="col-md-12">
 			<%= link_to "Organizations", root_path %>
 			/
-			<%= link_to @organization.name, organization_buckets_path(@organization) %>
+			<%= link_to "#{@organization.name}", organization_buckets_path(@organization) %>
+			/
+			Tweet Manager
 			<div class="pull-right">
 				Resources:
 				<%= render "shared/resource_links" %>
 			</div>
 		</div>
 	</div>
-	
 	<div class="row">
 		<div class="col-md-12">
 			<div class="well">
-				<% if @to_send_tweets.any? %>
-					<% @to_send_tweets.each do |tweet| %>
-						<%= render "tweets/csv_row", tweet: tweet %>
-					<% end %>
-					<div class="row small-top-margin">
-						<div class="col-md-12">
-							<%= link_to "<i class='fa fa-download'></i> CSV".html_safe, organization_tweet_manager_path(@organization, format: "csv"), class: "btn btn-default" %>
-							<%= link_to "Clear Sent Tweets", organization_clear_all_tweets_path(@organization), method: :put, class: "btn btn-default pull-right" %>
-						</div>
-					</div>
-					
-					<hr class="blue-hr">
-				<% end %>
 
-				<% timeslots = ["7:00am", "11:00am", "3:00pm"] %>
-				<% unless @approved_tweets == [] || @approved_tweets[0..2] == nil %>
-					<% @approved_tweets[0..2].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Monday" %>
-					<% end %>
-				<% end %>
-				<% unless @approved_tweets[3..5] == nil %>
-					<% @approved_tweets[3..5].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Wednesday" %>
-					<% end %>
-				<% end %>
-				<% unless @approved_tweets[6..8] == nil %>
-					<% @approved_tweets[6..8].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Thursday" %>
-					<% end %>
-				<% end %>
-				<% unless @approved_tweets[9..11] == nil %>
-					<% @approved_tweets[9..11].each_with_index do |tweet, index| %>
-						<%= render "tweets/tweet_compact", tweet: tweet, timeslot: timeslots[index], day: "Friday" %>
-					<% end %>
-				<% end %>
-				<% if @approved_tweets.size == 0 %>
-					<h4 class="center top-margin"><em>None</em></h4>
-				<% end %>
+				<div class="row">
+					<div class="col-md-4">
+						<h4 class="center">Disproved Tweets</h4>
+						<% @disproved_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_disproved_at %>
+						<% end %>
+						<% if @disproved_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
+						<% end %>
+					</div>
+					<div class="col-md-4">
+						<h4 class="center">Tweets Created</h4>
+						<% @unapproved_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet, date: tweet.created_at %>
+						<% end %>
+						<% if @unapproved_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
+						<% end %>
+					</div>
+					<div class="col-md-4">
+						<h4 class="center">Tweets Approved</h4>
+						<% @approved_tweets.each do |tweet| %>
+							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_approved_at %>
+						<% end %>
+						<% if @approved_tweets.size == 0 %>
+							<h4 class="center top-margin"><em>None</em></h4>
+						<% end %>
+					</div>
+
+				</div>
+				
 			</div>
 		</div>
 	</div>
-
-	
 </div>
+
+
+
