@@ -60,6 +60,9 @@
 					<div class="col-md-2"><div class="pull-right">Extracted Title:</div></div>
 					<div class="col-md-10">
 						<h3 class="no-margin">
+							<span class="tweet_resource_tag">
+								<%= @resource.id %>
+							</span>
 							<a href="<%= @resource.url %>" target="_blank">
 								<%= @resource.extraction.title %>
 							</a>
