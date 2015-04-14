@@ -1,14 +1,18 @@
-<%= link_to "All", organization_all_resources_path(@organization) %>
-|
-<%= link_to "Unread", organization_unread_resources_path(@organization) %>
-|
-<%= link_to "Approved", organization_approved_resources_path(@organization) %>
-|
-<%= link_to "Archived", organization_archived_resources_path(@organization) %>
-|
-Tweets:
-<%= link_to "Manager", organization_tweet_manager_path(@organization) %>
-|
-<%= link_to "Staged", organization_tweets_to_send_path(@organization) %>
-|
-<%= link_to "Sent", organization_sent_tweets_path(@organization) %>
+<div class="pull-right">
+	<%= link_to "All", organization_all_resources_path(@organization) %>
+	|
+	<%= link_to "Unread", organization_unread_resources_path(@organization) %>
+	|
+	<%= link_to "Approved", organization_approved_resources_path(@organization) %>
+	|
+	<%= link_to "Archived", organization_archived_resources_path(@organization) %>
+</div>
+<br>
+<div class="pull-right">
+	Tweets:
+	<%= link_to "Manager", organization_tweet_manager_path(@organization) %>
+	|
+	<%= link_to "Staged", organization_tweets_to_send_path(@organization) %>
+	|
+	<%= link_to "Sent", organization_sent_tweets_path(@organization) %>
+</div>
