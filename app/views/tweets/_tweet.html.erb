@@ -64,38 +64,7 @@
 			<% end %>
 		</div>
 		<div class="col-md-7">
-			<% if tweet.sent? %>
-				<%= submit_tag "✓ SENT", class: "btn btn-xs btn-default pull-right disabled" %>
-			<% else %>
-				<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
-					<%= f.hidden_field :resource_id, value: tweet.resource.id %>
-					<% if tweet.approved == false %>
-						<%= f.hidden_field :approved, value: true %>
-						<%= f.hidden_field :last_approved_at, value: DateTime.now %>
-					<% else %>
-						<%= f.hidden_field :approved, value: false %>
-					<% end %>
-					<% if tweet.approved == false %>
-						<%= f.submit "Approve", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
-					<% else %>
-						<%= f.submit "✓ Approved", class: "btn btn-xs btn-default btn-danger-hover pull-right" %>
-					<% end %>
-				<% end %>
-				<%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, class: "form-inline" do |f| %>
-					<%= f.hidden_field :resource_id, value: tweet.resource.id %>
-					<% if tweet.disproved == false %>
-						<%= f.hidden_field :disproved, value: true %>
-						<%= f.hidden_field :last_disproved_at, value: DateTime.now %>
-					<% else %>
-						<%= f.hidden_field :disproved, value: false %>
-					<% end %>
-					<% if tweet.disproved == false %>
-						<%= f.submit "X Decline", class: "btn btn-xs btn-default btn-success-hover pull-right", title: "Disprove" %>
-					<% else %>
-						<%= f.submit "X Declined", class: "btn btn-xs btn-default btn-danger-hover pull-right", title: "X Disproved" %>
-					<% end %>
-				<% end %>
-			<% end %>
+			<%= render "tweets/action_buttons", tweet: tweet %>
 		</div>
 	</div>
 </div>

@@ -37,9 +37,11 @@
 						<% @resource.readings.each do |reading| %>
 							<%= render "readings/unreading_btn", reading: reading %>
 						<% end %>
-						
 						<%= render "resources/approve_form", resource: @resource, btn_size: "btn-xs", placement: "pull-right" %>
 						<%= render "resources/archive_form", resource: @resource, btn_size: "btn-xs", placement: "pull-right small-right-margin" %>
+						<%= link_to [@organization, @resource.bucket, @resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+						  <i class='fa fa-trash pull-right small-right-margin' style="margin-top:3px;"></i>
+						<% end %>
 					</div>
 				</div>
 				<div class="row small-bottom-margin">
@@ -132,12 +134,14 @@
 						<%= @suggested_tweet %>
 					</div>
 				</div>
-				<hr class="blue-hr">
-				<div class="row small-bottom-margin">
-					<div class="col-md-6 col-md-offset-3">
-						<%= render "tweets/form", tweet: @tweet %>
+				<% if @resource.approved? %>
+					<hr class="blue-hr">
+					<div class="row small-bottom-margin">
+						<div class="col-md-6 col-md-offset-3">
+							<%= render "tweets/form", tweet: @tweet %>
+						</div>
 					</div>
-				</div>
+				<% end %>
 				<hr class="blue-hr">
 				<div class="row" style="margin-top:40px;">
 					<div class="col-md-6 col-md-offset-3">

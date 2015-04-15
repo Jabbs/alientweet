@@ -16,13 +16,15 @@
 	</div>
 <%= form_for [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :put, html: {class: "sending-form"} do |f| %>
 	<div class="col-md-4">
-		<% if day.present? && timeslot.present? %>
-			<% datetime = (day + timeslot).to_datetime + 7.days %>
-			<% datetime = nil %>
-		<% else %>
-			<% datetime = nil %>
+		<% unless tweet.sent? %>
+			<% if day.present? && timeslot.present? %>
+				<% datetime = (day + timeslot).to_datetime + 7.days %>
+				<% datetime = nil %>
+			<% else %>
+				<% datetime = nil %>
+			<% end %>
+			<%= f.datetime_select :scheduled_to_send_at, {default: datetime, minute_step: 5, :order => [:hour, :minute, :day, :month, :year]}, {class: "inline"} %>
 		<% end %>
-		<%= f.datetime_select :scheduled_to_send_at, {default: datetime, minute_step: 5, :order => [:hour, :minute, :day, :month, :year]}, {class: "inline"} %>
 	</div>
 	<div class="col-md-2">
 		<%= f.hidden_field :resource_id, value: tweet.resource.id %>

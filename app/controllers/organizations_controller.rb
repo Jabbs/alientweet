@@ -36,6 +36,7 @@ class OrganizationsController < ApplicationController
     @disproved_tweets = @tweets.where(disproved: true).order("last_approved_at DESC").limit(20)
     @unapproved_tweets = @tweets.where(disproved: false).where(approved: false).where(sent: false).order("created_at DESC").limit(20)
     @approved_tweets = @tweets.where(disproved: false).where(approved: true).where(sent: false).order("last_approved_at DESC").limit(20)
+    @tweet = Tweet.new
   end
   
   def tweets_to_send

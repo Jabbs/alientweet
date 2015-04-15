@@ -95,7 +95,6 @@ $body_grey: #4a4a4a;
   border-bottom: 1px solid $blue;
 }
 .grey-hr {
-  border-top: 1px solid $grey_dark;
   border-bottom: 1px solid $grey_dark;
 }
 /* Universal */
@@ -213,6 +212,10 @@ p { margin-bottom: 20px; font-weight: normal;}
 	z-index:5;
 }
 
+.approved-background {
+	background: $blue_light;
+}
+
 .tweet.active {
 	background: $blue_light;
 }
@@ -220,6 +223,9 @@ p { margin-bottom: 20px; font-weight: normal;}
 	background: lighten($green, 20%);
 }
 .tweet.grey-background { background: darken($grey, 10%); }
+.tweet-copy {
+	color: $green; 
+}
 
 #organizations {
 	padding:10px;

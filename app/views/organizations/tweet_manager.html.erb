@@ -18,7 +18,7 @@
 
 				<div class="row">
 					<div class="col-md-4">
-						<h4 class="center">Disproved Tweets</h4>
+						<h4 class="center">Archived Tweets</h4>
 						<% @disproved_tweets.each do |tweet| %>
 							<%= render "tweets/tweet", tweet: tweet, date: tweet.last_disproved_at %>
 						<% end %>
