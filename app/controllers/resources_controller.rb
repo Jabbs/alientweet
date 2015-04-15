@@ -57,7 +57,20 @@ class ResourcesController < ApplicationController
   def destroy
     @resource = Resource.find(params[:id])
     @resource.destroy
-    redirect_to organization_bucket_resources_path(@organization, @bucket), notice: "Resource removed."
+    
+    referrer = request.referer.split('/').last
+    logger.debug "REFERRER: #{referrer}"
+    if referrer == "all_resources"
+      redirect_to organization_all_resources_path(@organization)
+    elsif referrer == "buckets"
+      redirect_to organization_buckets_path(@organization)
+    elsif referrer == "unread_resources"
+      redirect_to organization_unread_resources_path(@organization)
+    elsif referrer == "approved_resources"
+      redirect_to organization_approved_resources_path(@organization)
+    else
+      redirect_to [@organization, @resource.bucket, @resource]
+    end
   end
   
   private

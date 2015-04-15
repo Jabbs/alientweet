@@ -75,7 +75,7 @@ class TweetsController < ApplicationController
     def instantiate_stuff
       @organization = Organization.find(params[:organization_id])
       @bucket = @organization.buckets.find(params[:bucket_id])
-      @resource = @bucket.resources.find(params[:resource_id])
+      @resource = @bucket.resources.find(params[:resource_id]) if params[:resource_id]
     end
     
     def tweet_params
