@@ -35,7 +35,7 @@
 			<%= f.hidden_field :sent, value: false %>
 		<% end %>
 		<% if tweet.sent == false %>
-			<%= f.submit "Send", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
+			<%= f.submit "Add", class: "btn btn-xs btn-default btn-success-hover pull-right" %>
 		<% else %>
 			<%= f.submit "✓ #{tweet.scheduled_to_send_at.strftime("%b %-d %-l:%M%P")}", class: "btn btn-xs btn-default btn-danger-hover pull-right", disabled: true %>
 		<% end %>

@@ -23,7 +23,7 @@
 					<div class="row small-top-margin">
 						<div class="col-md-12">
 							<%= link_to "<i class='fa fa-download'></i> CSV".html_safe, organization_tweets_to_send_path(@organization, format: "csv"), class: "btn btn-default" %>
-							<%= link_to "Clear Sent Tweets", organization_clear_all_tweets_path(@organization), method: :put, class: "btn btn-default pull-right" %>
+							<%= link_to "Clear Tweets (after uploaded to Hootsuite)", organization_clear_all_tweets_path(@organization), method: :put, class: "btn btn-default pull-right" %>
 						</div>
 					</div>
 					
