@@ -13,4 +13,5 @@ class ApplicationController < ActionController::Base
   def track_activity(trackable, action = params[:action])
     @organization.activities.create! action: action, trackable: trackable
   end
+  
 end

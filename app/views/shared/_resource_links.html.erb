@@ -1,9 +1,9 @@
 <div class="pull-right">
 	<%= link_to "All", organization_all_resources_path(@organization) %>
 	|
-	<%= link_to "Unread", organization_unread_resources_path(@organization) %>
+	<%= link_to "Unread (#{@organization.resources.where(read: false).size})", organization_unread_resources_path(@organization) %>
 	|
-	<%= link_to "Approved", organization_approved_resources_path(@organization) %>
+	<%= link_to "Approved (#{@organization.resources.where(approved: true).size})", organization_approved_resources_path(@organization) %>
 	|
 	<%= link_to "Archived", organization_archived_resources_path(@organization) %>
 </div>

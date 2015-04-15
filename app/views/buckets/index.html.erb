@@ -64,6 +64,11 @@
 				</div>
 				
 				<hr class="blue-hr">
+				<div class="row small-bottom-margin">
+					<div class="col-md-12">
+						<strong>Tweets &#38; Resources to "approve", "archive", or "trash"</strong>
+					</div>
+				</div>
 				<% if @activities.any? %>
 					<% @activities.each do |activity| %>
 						<%= render "activities/#{activity.trackable_type.underscore}/#{activity.action}", activity: activity %>

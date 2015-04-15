@@ -1,28 +1,30 @@
 <% tweet = activity.trackable %>
-<div class="row small-bottom-margin">
-	<div class="col-md-1" style="padding-top:6px;">
-		<i class='fa fa-twitter big' title='tweet'></i>
-		<small>
-			<% if tweet.contributor.present? %>
-				by <%= tweet.contributor.name %>
+<% unless tweet.approved? || tweet.disproved? %>
+	<div class="row small-bottom-margin">
+		<div class="col-md-1" style="padding-top:6px;">
+			<i class='fa fa-twitter big' title='tweet'></i>
+			<small>
+				<% if tweet.contributor.present? %>
+					by <%= tweet.contributor.name %>
+				<% end %>
+			</small>
+		</div>
+		<div class="col-md-7">
+			NEW TWEET: 
+			<span class="tweet-copy">"<%= tweet.copy %>"</span>
+			to resource
+			<span class="tweet_resource_tag">
+				<%= tweet.resource.id %>
+			</span>
+			<%= link_to tweet.resource.extraction.title, [@organization, tweet.resource.bucket, tweet.resource] %>
+		</div>
+		<div class="col-md-3">
+			<%= render "tweets/action_buttons", tweet: tweet %>
+			<%= link_to [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+			  <i class='fa fa-trash pull-right small-right-margin' style="margin-top:3px;"></i>
 			<% end %>
-		</small>
+		</div>
+		<div class="col-md-1"><small><div class="pull-right"><%= tweet.created_at.strftime('%-m/%d/%y %-l:%M%P') %></div></small></div>
 	</div>
-	<div class="col-md-7">
-		NEW TWEET: 
-		<span class="tweet-copy">"<%= tweet.copy %>"</span>
-		to resource
-		<span class="tweet_resource_tag">
-			<%= tweet.resource.id %>
-		</span>
-		<%= link_to tweet.resource.extraction.title, [@organization, tweet.resource.bucket, tweet.resource] %>
-	</div>
-	<div class="col-md-3">
-		<%= render "tweets/action_buttons", tweet: tweet %>
-		<%= link_to [tweet.resource.bucket.organization, tweet.resource.bucket, tweet.resource, tweet], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
-		  <i class='fa fa-trash pull-right small-right-margin' style="margin-top:3px;"></i>
-		<% end %>
-	</div>
-	<div class="col-md-1"><small><div class="pull-right"><%= tweet.created_at.strftime('%-m/%d/%y %-l:%M%P') %></div></small></div>
-</div>
-<hr class="grey-hr small-top-margin small-bottom-margin">
+	<hr class="grey-hr small-top-margin small-bottom-margin">
+<% end %>

@@ -1,29 +1,31 @@
 <% resource = activity.trackable %>
-<div class="row small-bottom-margin">
-	<div class="col-md-1" style="padding-top:6px;">
-		<i class='fa fa-book big' title='Resource'></i>
-		<small>
-			<% if resource.contributor.present? %>
-				by <%= resource.contributor.name %>
+<% unless resource.approved? || resource.archived? %>
+	<div class="row small-bottom-margin">
+		<div class="col-md-1" style="padding-top:6px;">
+			<i class='fa fa-book big' title='Resource'></i>
+			<small>
+				<% if resource.contributor.present? %>
+					by <%= resource.contributor.name %>
+				<% end %>
+			</small>
+		</div>
+		<div class="col-md-7">
+			NEW RESOURCE:
+			<span class="tweet_resource_tag">
+				<%= resource.id %>
+			</span>
+			<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>
+			added to bucket
+			<%= link_to "#{resource.bucket.name}", organization_bucket_resources_path(resource.bucket.organization, resource.bucket) %>
+		</div>
+		<div class="col-md-3">
+			<%= render "resources/approve_form", resource: resource, btn_size: "btn-xs", placement: "pull-right" %>
+			<%= render "resources/archive_form", resource: resource, btn_size: "btn-xs", placement: "pull-right small-right-margin" %>
+			<%= link_to [@organization, resource.bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
+			  <i class='fa fa-trash pull-right small-right-margin' style="margin-top:3px;"></i>
 			<% end %>
-		</small>
+		</div>
+		<div class="col-md-1"><small><div class="pull-right"><%= resource.created_at.strftime('%-m/%d/%y %-l:%M%P') %></div></small></div>
 	</div>
-	<div class="col-md-7">
-		NEW RESOURCE:
-		<span class="tweet_resource_tag">
-			<%= resource.id %>
-		</span>
-		<%= link_to resource.extraction.title, [@organization, resource.bucket, resource] %>
-		added to bucket
-		<%= link_to "#{resource.bucket.name}", organization_bucket_resources_path(resource.bucket.organization, resource.bucket) %>
-	</div>
-	<div class="col-md-3">
-		<%= render "resources/approve_form", resource: resource, btn_size: "btn-xs", placement: "pull-right" %>
-		<%= render "resources/archive_form", resource: resource, btn_size: "btn-xs", placement: "pull-right small-right-margin" %>
-		<%= link_to [@organization, resource.bucket, resource], method: :delete, class: "grey-link", data: { confirm: 'Are you sure?' } do %>
-		  <i class='fa fa-trash pull-right small-right-margin' style="margin-top:3px;"></i>
-		<% end %>
-	</div>
-	<div class="col-md-1"><small><div class="pull-right"><%= resource.created_at.strftime('%-m/%d/%y %-l:%M%P') %></div></small></div>
-</div>
-<hr class="grey-hr small-top-margin small-bottom-margin">
+	<hr class="grey-hr small-top-margin small-bottom-margin">
+<% end %>
