@@ -34,7 +34,7 @@ class Tweet < ActiveRecord::Base
     CSV.generate(options) do |csv|
       all.each do |tweet|
         row = []
-        row << tweet.scheduled_to_send_at.strftime("%-m/%-d/%y %H:%M")
+        row << tweet.scheduled_to_send_at.strftime("%m/%-d/%y %H:%M")
         row << tweet.copy
         row << tweet.resource.url
         csv << row
