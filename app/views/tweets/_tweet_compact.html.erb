@@ -3,8 +3,10 @@
 		<span class="tweet_resource_tag">
 			<%= link_to tweet.resource.id, [@organization, tweet.resource.bucket, tweet.resource] %>
 		</span>
-		<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
-		<%= render "tweets/edit_tweet_modal", tweet: tweet %>
+		<% unless tweet.sent? %>
+			<a class="grey-link-dark" data-toggle="modal" data-target="#editTweetModal<%= tweet.id %>" href="#" role="button"><i class='fa fa-pencil' title="edit tweet"></i></a>
+			<%= render "tweets/edit_tweet_modal", tweet: tweet %>
+		<% end %>
 	</div>
 	<div class="col-md-5">
 		<small class="tweet-url">
