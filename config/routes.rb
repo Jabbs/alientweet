@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :organizations do
+    get "twitter_analysis"
     get "all_resources"
     get "archived_resources"
     get "approved_resources"

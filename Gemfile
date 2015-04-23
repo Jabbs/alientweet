@@ -14,6 +14,7 @@ gem 'nokogiri'
 gem 'feedjira'
 gem 'mechanize'
 gem 'devise'
+gem 'descriptive-statistics'
 
 group :development do
   gem 'letter_opener'

@@ -2,6 +2,10 @@ class OrganizationsController < ApplicationController
   before_filter :instantiate_orgs
   respond_to :html, :js
   
+  def twitter_analysis
+    
+  end
+  
   def show
     @organization = Organization.find(params[:id])
   end
